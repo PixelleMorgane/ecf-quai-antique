@@ -12,17 +12,11 @@ function Header() {
                 </a>
             </div>
             <nav>
-                <ul>
-                    <li>
-                        <a href="#">Carte</a>
-                    </li>
-                    <li>
-                        <a href="#">Connexion</a>
-                    </li>
-                </ul>
+                <a href="#">Carte</a>
+                <a href="#">Connexion</a>
                 <Button className='button' color="dark" size="md" compact>Réserver</Button>
-                <Burger className='burger-icon' size="sm" />
             </nav>
+                <Burger className='burger-icon' size="sm" />
         </div>
     )
 }

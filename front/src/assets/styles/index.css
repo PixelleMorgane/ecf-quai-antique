@@ -1,6 +1,6 @@
 :root {
   --primary: #20232a;
-  --secodary: #fefefe;
+  --secondary: #fefefe;
   --tertiary: #D4AE26;
   --font-family-title: 'Playfair Display', serif;
   --font-family-text: 'Montserrat', sans-serif;
@@ -22,6 +22,10 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-family-title);
 }
 
 .button {

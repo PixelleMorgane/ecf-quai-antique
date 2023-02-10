@@ -7,34 +7,54 @@
     align-items: center;
 }
 
+.header-container .logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.header-container .logo-container a {
+    display: flex;
+    align-items: center;
+}
+
 .logo {
     height: 40px;
 }
 
 .header-container nav {
-    width: 500px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.header-container nav ul {
-    width: 300px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.header-container nav ul li a{
-    text-decoration: none;
-    color: var(--text-color);
-    font-family: var(--font-family-title);
-    font-weight: 500;
+    display: none;
 }
 
 .burger-icon {
-    display: none;
+    display: block;
+}
+
+
+
+
+
+
+
+/* ==========     Le responsive    =========== */
+
+@media screen and (min-width: 738px) {
+    .burger-icon {
+        display: none;
+    }
+
+    .header-container nav {
+        width: 500px;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .header-container nav a{
+        text-decoration: none;
+        color: var(--text-color);
+        font-family: var(--font-family-title);
+        font-weight: 500;
+    }
 }
