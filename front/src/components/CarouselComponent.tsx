@@ -29,20 +29,20 @@ const data = [
   }
 ];
 
-function CarouselComponent() {
-  const slides = data.map(({title, image}) => (
-    <Carousel.Slide key={title}>
-      <Image 
-        // width={700}
-        // height={450}
-        fit="cover"
-        src={image}
-        caption={title}
-        className='img-slide'
-        />
-    </Carousel.Slide>
-  ));
+const slides = data.map(({title, image}) => (
+  <Carousel.Slide key={title}>
+    <Image 
+      // width={700}
+      // height={450}
+      fit="cover"
+      src={image}
+      caption={title}
+      className='img-slide'
+      />
+  </Carousel.Slide>
+));
 
+function CarouselComponent() {
   return (
     <Carousel sx={{ maxWidth: 700 }} mx="auto" withIndicators>
       {slides}

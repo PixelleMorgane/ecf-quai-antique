@@ -1,5 +1,5 @@
 import chef from '../assets/images/chef.jpg'
-import CarouselComponent from './CarouselComponent'
+import CarouselComponent from '../components/CarouselComponent'
 import '../assets/styles/HomePage.css'
 
 function HomePage() {
