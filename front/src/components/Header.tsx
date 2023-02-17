@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import logo from '../assets/images/logo-qa-noir.png';
-import { Header, Image, Burger, MediaQuery, Button, Box, NavLink, useMantineTheme, } from '@mantine/core';
+import { Header, Image, Burger, MediaQuery, Button, Box, NavLink, Navbar, Text, useMantineTheme } from '@mantine/core';
 
 
 function MyHeader() {
@@ -16,7 +16,7 @@ function MyHeader() {
             src={logo}
             alt="Logo du restaurant le Quai Antique"
         />
-        <Box  
+       <Box  
           // hiddenBreakpoint="sm" 
           hidden={!opened} 
           // width={{ sm: 200, lg: 300 }}          
@@ -30,7 +30,7 @@ function MyHeader() {
         >
           <NavLink label="Carte" component="a" href="/home" target="_blank" />
           <NavLink label="Connexion" component="a" href="/home" target="_blank" />
-          <Button className='button' color="dark" size="md" compact>Réserver</Button>
+          <Button className='button' color="dark" size="md" compact>Réserver</Button> 
         </Box>
         <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
           <Burger
