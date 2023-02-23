@@ -4,7 +4,8 @@ import plat3 from '../assets/images/plat-3.jpg';
 import plat4 from '../assets/images/plat-4.jpg';
 import plat5 from '../assets/images/plat-5.jpg';
 import { Carousel } from '@mantine/carousel';
-import { Image, Text } from '@mantine/core';
+import { Image, Text, useMantineTheme } from '@mantine/core';
+
 
 const data = [
   {
@@ -28,6 +29,7 @@ const data = [
     image: plat5
   }
 ];
+
 
 const slides = data.map(({title, image}) => (
   <Carousel.Slide key={title} style={{ position: 'relative' }}>
@@ -59,6 +61,8 @@ const slides = data.map(({title, image}) => (
 ));
 
 function CarouselComponent() {
+  const theme = useMantineTheme();
+
   return (
     <Carousel sx={{ maxWidth: 700 }} mx="auto" withIndicators>
       {slides}
