@@ -1,10 +1,16 @@
-[33mcommit a531aa99ffe7bf1a08ae44aec7a1e277d9ae48d4[m[33m ([m[1;36mHEAD -> [m[1;32mhome[m[33m)[m
+[33mcommit ae6eb71a12c243d1dc968989c37ad9153cdbdc68[m[33m ([m[1;36mHEAD -> [m[1;32mhome[m[33m, [m[1;31morigin/home[m[33m)[m
+Author: Morgane MAUREL <mormaurelpro@gmail.com>
+Date:   Thu Feb 23 11:04:52 2023 +0100
+
+    Create a custom theme and update header
+
+[33mcommit a531aa99ffe7bf1a08ae44aec7a1e277d9ae48d4[m
 Author: Morgane MAUREL <mormaurelpro@gmail.com>
 Date:   Fri Feb 17 18:32:25 2023 +0100
 
     Update Home page with Mantine
 
-[33mcommit b1f430fa15b29bc812279214abe947e436bd61c0[m[33m ([m[1;31morigin/home[m[33m)[m
+[33mcommit b1f430fa15b29bc812279214abe947e436bd61c0[m
 Author: Morgane MAUREL <mormaurelpro@gmail.com>
 Date:   Fri Feb 17 10:39:53 2023 +0100
 
