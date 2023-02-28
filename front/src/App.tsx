@@ -1,16 +1,26 @@
 import React from 'react';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Header from './components/Header';
 import Footer from './components/Footer';
-import HomePage from './components/HomePage';
+import HomePage from './pages/HomePage';
+import { MantineProvider } from '@mantine/core';
+import MyTheme from './utils/myTheme';
 import './assets/styles/App.css';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+  },
+]);
 
 function App() {
   return (
-    <div className="App">
+    <MantineProvider theme={MyTheme} withGlobalStyles withCSSVariables withNormalizeCSS>
       <Header />
-      <HomePage />
+      <RouterProvider router={router} />
       <Footer />
-    </div>
+    </MantineProvider>
   );
 }
 
