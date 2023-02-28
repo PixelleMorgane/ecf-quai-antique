@@ -32,7 +32,7 @@ function MyFooter() {
                 alt="Logo du restaurant le Quai Antique"
           />
           <Box>
-            <Title order={3}>Horaires</Title>
+            <Title sx={{ color: 'white' }} order={3}>Horaires</Title>
             <List listStyleType="none"
               sx={(theme) => ({
                 color: 'white',

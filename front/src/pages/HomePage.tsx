@@ -23,14 +23,17 @@ function HomePage() {
                     alignItems: 'center'
                 }}
             >
-                <Title style={{ fontFamily: `'Playfair Display', serif` }} order={1}>Bienvenue au Quai Antique</Title>
+                <Title sx={{ color: 'white' }} order={1}>Bienvenue au Quai Antique</Title>
             </Box>
             <Box
                 sx={{ 
+                    maxWidth: 1000,
+                    margin: 'auto',
                     paddingTop: 50,
                     display: 'flex',
                     justifyContent: 'space-around',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    flexWrap: 'wrap'
                 }}
             >
                 <Image 
@@ -39,8 +42,8 @@ function HomePage() {
                     alt="Chef cuisinier"
                     src={chef}
                 />
-                <Box>
-                    <Title style={{ fontFamily: `'Playfair Display', serif` }} order={2}>Notre cuisine...</Title>
+                <Box sx={{ margin: 10 }}>
+                    <Title order={2}>Notre cuisine...</Title>
                     <Text
                         sx={{ 
                             maxWidth: 450
@@ -71,7 +74,7 @@ function HomePage() {
                     // alignItems: 'center',
                     }}
                 >                
-                    <Title style={{ fontFamily: `'Playfair Display', serif`, marginBottom: 20 }} order={2}>Les immanquables</Title> 
+                    <Title style={{ marginBottom: 20 }} order={2}>Les immanquables</Title> 
                     <CarouselComponent />       
                 </Box>
             </Box>

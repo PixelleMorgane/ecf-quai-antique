@@ -2,10 +2,42 @@ import { MantineThemeOverride } from "@mantine/core";
 
 const myTheme: MantineThemeOverride = {
   colors: {
-    primary: ["#20232a"],
-    secondary: ["#fefefe"],
-    tertiary: ["#D4AE26"],
-    text: ["#444"]
+    primary: [
+      "#F1F2F4",
+      "#D6D9E0",
+      "#BCC1CC",
+      "#A2A9B8",
+      "#8891A5",
+      "#6E7991",
+      "#586074",
+      "#424857",
+      "#2C303A",
+      "#16181D"
+    ],
+    secondary: [
+      "#F2F2F2",
+      "#DBDBDB",
+      "#C4C4C4",
+      "#ADADAD",
+      "#969696",
+      "#808080",
+      "#666666",
+      "#4D4D4D",
+      "#333333",
+      "#1A1A1A"
+    ],
+    tertiary: [
+      "#FBF7E9",
+      "#F4E9C2",
+      "#EDDB9C",
+      "#E6CD75",
+      "#DFBF4E",
+      "#D8B127",
+      "#AD8E1F",
+      "#826A17",
+      "#564710",
+      "#2B2308"
+    ],
   },
   
   fontFamily: "'Montserrat', sans-serif",
@@ -21,11 +53,11 @@ const myTheme: MantineThemeOverride = {
     fontFamily: "'Playfair Display', serif",
     fontWeight: 500,
     sizes: {
-      h1: { fontSize: "38px" },
-      h2: { fontSize: "30px" },
-      h3: { fontSize: "22px" },
-      h4: { fontSize: "17px" },
-      h5: { fontSize: "15px" }
+      h1: { fontSize: 38 },
+      h2: { fontSize: 30 },
+      h3: { fontSize: 22 },
+      h4: { fontSize: 17 },
+      h5: { fontSize: 15 }
     }
   },
   
@@ -33,7 +65,7 @@ const myTheme: MantineThemeOverride = {
     defaultText: {
       desktop: "lg",
       mobile: "sm",
-    },
+    }
   }  
 };
 

@@ -72,8 +72,8 @@ function MyHeader() {
                 padding: theme.spacing.xl,
               })}
             >
-              <NavLink className={classes.link} label="Carte" component="a" href="/home" target="_blank" />
-              <NavLink className={classes.link} label="Connexion" component="a" href="/home" target="_blank" />
+              <NavLink className={classes.link} label="Carte" component="a" href="#" target="_blank" />
+              <NavLink className={classes.link} label="Connexion" component="a" href="#" target="_blank" />
               <Button className='button' color="dark" size="md" compact style={{ margin: 5 }}>Réserver</Button> 
             </Navbar>
 
