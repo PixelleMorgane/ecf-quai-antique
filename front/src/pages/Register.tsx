@@ -2,6 +2,7 @@ import heroImage from '../assets/images/plat-8.jpg'
 import { useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
+import { register } from '../utils/api';
 import { PasswordInput, MultiSelect, TextInput, Title, Button, Box, Code, useMantineTheme } from '@mantine/core';
 
 const data = [
@@ -26,7 +27,8 @@ function Register() {
     initialValues: {
       firstName: '',
       lastName: '',
-      email: ''
+      email: '',
+      password: ''
     },
   });
 
@@ -50,35 +52,44 @@ function Register() {
       </Box>
       <Box maw={400} mx="auto" sx={{ padding: 20 }}>
         <form
-          onSubmit={form.onSubmit((values) => setSubmittedValues(JSON.stringify(values, null, 2)))}
+          onSubmit={form.onSubmit((values) => {
+            setSubmittedValues(JSON.stringify(values, null, 2))
+            register(values)
+          })}
         >
           <TextInput
             label="Prénom"
+            id="firstName"
             placeholder="First name"
             {...form.getInputProps('firstName')}
           />
           <TextInput
             label="Nom"
+            id="lastName"
             placeholder="Last name"
             mt="md"
             {...form.getInputProps('lastName')}
           />
           <TextInput
             label="email"
+            id="email"
             placeholder="email"
             mt="md"
             {...form.getInputProps('email')}
           />
           <PasswordInput
             label="Mot de Passe"
+            id="password"
             defaultValue=""
             placeholder="Mot de Passe"
             mt="md"
             visible={visible}
             onVisibilityChange={toggle}
+            {...form.getInputProps('password')}
           />
           <PasswordInput
             label="Confirmation Mot de Passe"
+            id="confirmPassword"
             defaultValue=""
             placeholder="Confirmation Mot de Passe"
             mt="md"
