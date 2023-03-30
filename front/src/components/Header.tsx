@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import logo from '../assets/images/logo-qa-noir.png';
-import { Header, MantineProvider, Image, Burger, MediaQuery, Button, Box, Navbar, NavLink, createStyles } from '@mantine/core';
+import { Header, MantineProvider, Anchor, Image, Burger, MediaQuery, Button, Box, Navbar, NavLink, createStyles } from '@mantine/core';
 import MyTheme from '../utils/myTheme';
 
 
@@ -22,12 +22,14 @@ function MyHeader() {
   return (
       <Header height={{ base: 50, md: 70 }} p="md">
       <Box style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100%', position: 'relative' }}>
-        <Image
-            width={88}
-            height={40}
-            src={logo}
-            alt="Logo du restaurant le Quai Antique"
-        />
+        <Anchor href="/">
+          <Image
+              width={88}
+              height={40}
+              src={logo}
+              alt="Logo du restaurant le Quai Antique"
+          />
+        </Anchor>
         <MantineProvider
           theme={{
             components: {
@@ -72,9 +74,9 @@ function MyHeader() {
                 padding: theme.spacing.xl,
               })}
             >
-              <NavLink className={classes.link} label="Carte" component="a" href="#" target="_blank" />
-              <NavLink className={classes.link} label="Connexion" component="a" href="#" target="_blank" />
-              <NavLink className={classes.link} label="Inscription" component="a" href="register" target="_blank" />
+              <NavLink className={classes.link} label="Carte" component="a" href="#" />
+              <NavLink className={classes.link} label="Connexion" component="a" href="#" />
+              <NavLink className={classes.link} label="Inscription" component="a" href="register" />
               <Button className='button' color="dark" size="md" compact style={{ margin: 5 }}>Réserver</Button> 
             </Navbar>
 
