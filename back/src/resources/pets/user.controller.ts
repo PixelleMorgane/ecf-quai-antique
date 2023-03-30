@@ -1,9 +1,11 @@
 import { Router } from 'express'
 import { PetsService } from '~/resources/pets/pets.service'
 import { BadRequestException, NotFoundException } from '~/utils/exceptions'
+import {v4 as uuidv4} from 'uuid';
 
 const db = require('../../config/database');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
+let myuuid = uuidv4();
 
 /**
  * Nous créeons un `Router` Express, il nous permet de créer des routes en dehors du fichier `src/index.ts`
@@ -121,10 +123,10 @@ UserController.post('/register', async function(req,res) {
     } 
   
 
-    let hashedPassword = await bcrypt.hash(password, 8);
-    console.log(hashedPassword);
+    // let hashedPassword = await bcrypt.hash(password, 8);
+    // console.log(hashedPassword);
 
-    const resultInsert = await db.query('INSERT INTO users (id, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)', [ 'cd41294a-afb0-11df-bc9b-00241dd75638', firstName, lastName, email, hashedPassword ])
+    const resultInsert = await db.query('INSERT INTO users (id, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)', [ `${myuuid}`, firstName, lastName, email, password ])
     return res.status(201).json('coucou')
 })
 
