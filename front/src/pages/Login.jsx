@@ -1,9 +1,10 @@
 import heroImage from '../assets/images/plat-1.jpg'
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
 import { login } from '../utils/api';
 import { PasswordInput, TextInput, Title, Button, Box, Code, useMantineTheme } from '@mantine/core';
+import { CurrentUserContext } from '../App';
 
 
 function Login() {
@@ -11,6 +12,7 @@ function Login() {
   const theme = useMantineTheme();
   const [submittedValues, setSubmittedValues] = useState('');
   const [visible, { toggle }] = useDisclosure(false);
+  const {user, setUser} = useContext(CurrentUserContext)
 
   const form = useForm({
     initialValues: {
@@ -66,7 +68,15 @@ function Login() {
             onVisibilityChange={toggle}
             {...form.getInputProps('password')}
           />
-          <Button type="submit" className='button' color="dark" size="md" compact style={{ marginTop: 15 }}>Connexion</Button> 
+          <Button 
+            type="submit" 
+            className='button' 
+            color="dark" size="md" 
+            compact 
+            style={{ marginTop: 15 }}
+          >
+            Connexion
+          </Button> 
         </form>
 
         {submittedValues && <Code block>{submittedValues}</Code>}

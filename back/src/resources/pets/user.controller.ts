@@ -147,7 +147,7 @@ UserController.post('/login', async function(req,res) {
         const isSamePassword = await bcrypt.compare(password, emailResult[0].password)
         console.log(isSamePassword)
     }
-
+    // TO DO enlever password
     return res.status(200).json(emailResult[0])
 })
 
