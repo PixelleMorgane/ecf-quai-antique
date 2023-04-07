@@ -75,7 +75,7 @@ function MyHeader() {
               })}
             >
               <NavLink className={classes.link} label="Carte" component="a" href="#" />
-              <NavLink className={classes.link} label="Connexion" component="a" href="#" />
+              <NavLink className={classes.link} label="Connexion" component="a" href="login" />
               <NavLink className={classes.link} label="Inscription" component="a" href="register" />
               <Button className='button' color="dark" size="md" compact style={{ margin: 5 }}>Réserver</Button> 
             </Navbar>

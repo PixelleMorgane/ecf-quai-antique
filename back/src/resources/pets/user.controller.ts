@@ -1,7 +1,9 @@
-import { Router } from 'express'
-import { PetsService } from '~/resources/pets/pets.service'
-import { BadRequestException, NotFoundException } from '~/utils/exceptions'
-import {v4 as uuidv4} from 'uuid';
+import { Router } from 'express';
+import session from 'express-session';
+import { PetsService } from '~/resources/pets/pets.service';
+import { BadRequestException, NotFoundException } from '~/utils/exceptions';
+import {v4 as uuidv4} from 'uuid'; 
+import bcrypt from 'bcryptjs';
 
 const db = require('../../config/database');
 // const bcrypt = require('bcrypt');
@@ -11,6 +13,7 @@ let myuuid = uuidv4();
  * Nous créeons un `Router` Express, il nous permet de créer des routes en dehors du fichier `src/index.ts`
  */
 const UserController = Router()
+
 
 // /**
 //  * Instance de notre service
@@ -115,7 +118,6 @@ const UserController = Router()
 UserController.post('/register', async function(req,res) {
     console.log(req.body);
     const { firstName, lastName, email, password } = req.body;
-    // db.query('SELECT * FROM users LIMIT 100', async (err: any, results: any) => {
     const result = await db.query('SELECT email from users WHERE email = ?', [email]) ;
    
     if (result.length > 0) {
@@ -128,6 +130,25 @@ UserController.post('/register', async function(req,res) {
 
     const resultInsert = await db.query('INSERT INTO users (id, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)', [ `${myuuid}`, firstName, lastName, email, password ])
     return res.status(201).json('coucou')
+})
+
+
+
+UserController.post('/login', async function(req,res) {
+    console.log(req.body);
+    const { email, password } = req.body;
+    
+    const emailResult = await db.query('SELECT * FROM users WHERE email = ? ', [email]);
+    console.log(emailResult)
+
+    if (emailResult.length === 0) {
+        return res.status(400).json('Unknown user')         
+    } else {
+        const isSamePassword = await bcrypt.compare(password, emailResult[0].password)
+        console.log(isSamePassword)
+    }
+
+    return res.status(200).json(emailResult[0])
 })
 
 

@@ -1,23 +1,12 @@
-import heroImage from '../assets/images/plat-8.jpg'
+import heroImage from '../assets/images/plat-1.jpg'
 import { useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
-import { register } from '../utils/api';
-import { PasswordInput, MultiSelect, TextInput, Title, Button, Box, Code, useMantineTheme } from '@mantine/core';
+import { login } from '../utils/api';
+import { PasswordInput, TextInput, Title, Button, Box, Code, useMantineTheme } from '@mantine/core';
 
-const data = [
-  { value: 'gluten', label: 'Gulten' },
-  { value: 'lactose', label: 'Lactose' },
-  { value: 'huitre', label: 'Huîtres' },
-  { value: 'oeuf', label: 'Oeufs' },
-  { value: 'fac', label: 'Fruits à coques' },
-  { value: 'cereales', label: 'Céréales' },
-  { value: 'fdm', label: 'Fruits de mer' },
-  { value: 'poisson', label: 'Poisson' },
-  { value: 'legumineuse', label: 'Légumineuse' },
-];
 
-function Register() {
+function Login() {
 
   const theme = useMantineTheme();
   const [submittedValues, setSubmittedValues] = useState('');
@@ -48,28 +37,18 @@ function Register() {
               alignItems: 'center'
           }}
       >
-          <Title sx={{ color: 'white' }} order={1}>Inscrivez-vous</Title>
+          <Title sx={{ color: 'white' }} order={1}>Connectez-vous</Title>
       </Box>
       <Box maw={400} mx="auto" sx={{ padding: '80px 20px' }}>
         <form
           onSubmit={form.onSubmit((values) => {
-            setSubmittedValues(JSON.stringify(values, null, 2))
-            register(values)
+            // setSubmittedValues(JSON.stringify(values, null, 2))
+            login(values)
+            .then(user => {
+              console.log(user)
+            })
           })}
         >
-          <TextInput
-            label="Prénom"
-            id="firstName"
-            placeholder="First name"
-            {...form.getInputProps('firstName')}
-          />
-          <TextInput
-            label="Nom"
-            id="lastName"
-            placeholder="Last name"
-            mt="md"
-            {...form.getInputProps('lastName')}
-          />
           <TextInput
             label="email"
             id="email"
@@ -87,13 +66,7 @@ function Register() {
             onVisibilityChange={toggle}
             {...form.getInputProps('password')}
           />
-          <MultiSelect
-            data={data}
-            mt="md"
-            label="Allergies | intolérances alimentaires"
-            placeholder="Sélectionner les vos allergies"
-          />
-          <Button type="submit" className='button' color="dark" size="md" compact style={{ marginTop: 15 }}>Valider</Button> 
+          <Button type="submit" className='button' color="dark" size="md" compact style={{ marginTop: 15 }}>Connexion</Button> 
         </form>
 
         {submittedValues && <Code block>{submittedValues}</Code>}
@@ -103,4 +76,4 @@ function Register() {
 }
 
       
-export default Register
+export default Login

@@ -26,8 +26,8 @@ function MyFooter() {
           })}
         >
           <Image
-                width={195}
-                height={88}
+                width={150}
+                height={68}
                 src={logo}
                 alt="Logo du restaurant le Quai Antique"
           />
