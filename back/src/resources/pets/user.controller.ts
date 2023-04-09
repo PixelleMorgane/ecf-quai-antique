@@ -7,7 +7,6 @@ import bcrypt from 'bcryptjs';
 
 const db = require('../../config/database');
 // const bcrypt = require('bcrypt');
-let myuuid = uuidv4();
 
 /**
  * Nous créeons un `Router` Express, il nous permet de créer des routes en dehors du fichier `src/index.ts`
@@ -128,7 +127,7 @@ UserController.post('/register', async function(req,res) {
     // let hashedPassword = await bcrypt.hash(password, 8);
     // console.log(hashedPassword);
 
-    const resultInsert = await db.query('INSERT INTO users (id, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)', [ `${myuuid}`, firstName, lastName, email, password ])
+    const resultInsert = await db.query('INSERT INTO users (id, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)', [ `${uuidv4()}`, firstName, lastName, email, password ])
     return res.status(201).json('coucou')
 })
 

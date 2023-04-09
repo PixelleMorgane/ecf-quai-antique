@@ -1,14 +1,16 @@
 import heroImage from '../assets/images/plat-1.jpg'
 import { useContext, useState } from 'react';
+import { CurrentUserContext } from '../App';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
 import { login } from '../utils/api';
 import { PasswordInput, TextInput, Title, Button, Box, Code, useMantineTheme } from '@mantine/core';
-import { CurrentUserContext } from '../App';
+import { useNavigate } from 'react-router-dom';
 
 
 function Login() {
 
+  const navigate = useNavigate();
   const theme = useMantineTheme();
   const [submittedValues, setSubmittedValues] = useState('');
   const [visible, { toggle }] = useDisclosure(false);
@@ -48,6 +50,12 @@ function Login() {
             login(values)
             .then(user => {
               console.log(user)
+              setUser({
+                firstName: user.first_name,
+                lastName: user.last_name,
+                email: user.email,
+              })
+              navigate('/profile')
             })
           })}
         >
@@ -78,8 +86,6 @@ function Login() {
             Connexion
           </Button> 
         </form>
-
-        {submittedValues && <Code block>{submittedValues}</Code>}
       </Box>
     </Box>
   );

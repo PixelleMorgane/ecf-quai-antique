@@ -1,15 +1,16 @@
-import chef from '../assets/images/chef.jpg'
-import heroImage from '../assets/images/hero-image.jpg'
-import CarouselComponent from '../components/CarouselComponent'
 import { Image, Text, Title, Box, useMantineTheme } from '@mantine/core';
+import { useContext, useState } from 'react';
+import { CurrentUserContext } from '../App';
+import { login } from '../utils/api';
 
 function Profile() {
 
     const theme = useMantineTheme();
-
+    const {user, setUser} = useContext(CurrentUserContext)
+    console.log(user)
     return (
         <Box>
-           <Text>Hello unknown user !</Text>
+           <Text>Hello {user?.firstName} {user?.lastName} !</Text>
         </Box>
     )
 }

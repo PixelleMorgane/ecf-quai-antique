@@ -1,5 +1,7 @@
 import heroImage from '../assets/images/plat-8.jpg'
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { CurrentUserContext } from '../App';
+import { useNavigate } from 'react-router-dom';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
 import { register } from '../utils/api';
@@ -19,9 +21,11 @@ const data = [
 
 function Register() {
 
+  const navigate = useNavigate();
   const theme = useMantineTheme();
   const [submittedValues, setSubmittedValues] = useState('');
   const [visible, { toggle }] = useDisclosure(false);
+  const {user, setUser} = useContext(CurrentUserContext)
 
   const form = useForm({
     initialValues: {
@@ -53,8 +57,17 @@ function Register() {
       <Box maw={400} mx="auto" sx={{ padding: '80px 20px' }}>
         <form
           onSubmit={form.onSubmit((values) => {
-            setSubmittedValues(JSON.stringify(values, null, 2))
+            // setSubmittedValues(JSON.stringify(values, null, 2))
             register(values)
+            .then(value => {
+              console.log(user)
+              setUser({
+                firstName: form.values.firstName,
+                lastName: form.values.lastName,
+                email: form.values.email,
+              })
+              navigate('/profile')
+            })
           })}
         >
           <TextInput
@@ -95,8 +108,6 @@ function Register() {
           />
           <Button type="submit" className='button' color="dark" size="md" compact style={{ marginTop: 15 }}>Valider</Button> 
         </form>
-
-        {submittedValues && <Code block>{submittedValues}</Code>}
       </Box>
     </Box>
   );

@@ -20,7 +20,8 @@ export async function register (values: {
     })
     .then((res) => {
         // to do treat response
-        return window.location.href = `http://localhost:3000/profile`;
+        const user = res.data;
+        return user
     })
     .catch((error) => {
         // to do treat error
