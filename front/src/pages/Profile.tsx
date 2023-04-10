@@ -14,6 +14,7 @@ function Profile() {
             firstName: '',
             lastName: '',
             email: '',
+            isAdmin: 0,
         })
         navigate('/home')
     };

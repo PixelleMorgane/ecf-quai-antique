@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
+import Admin from './pages/AdminPannel';
 import { MantineProvider } from '@mantine/core';
 import MyTheme from './utils/myTheme';
 import './assets/styles/App.css';
@@ -15,6 +16,7 @@ export type User = {
   firstName: string;
   lastName: string;
   email: string;
+  isAdmin: number;
 };
 
 export type CurrentUserContextType = {
@@ -44,6 +46,10 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <Profile />,
+  },
+  {
+    path: "/control-pannel",
+    element: <Admin />,
   },
 ]);
 

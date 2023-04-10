@@ -65,6 +65,7 @@ function Register() {
                 firstName: form.values.firstName,
                 lastName: form.values.lastName,
                 email: form.values.email,
+                isAdmin: 0,
               })
               navigate('/profile')
             })
