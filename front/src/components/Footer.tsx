@@ -22,6 +22,7 @@ function MyFooter() {
             display: 'flex',
             justifyContent: 'space-around',
             alignItems: 'center',
+            flexWrap: 'wrap',
             color: 'white',
           })}
         >

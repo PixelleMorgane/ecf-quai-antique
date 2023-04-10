@@ -59,7 +59,7 @@ function Login() {
               if(user.is_admin === 0) {
                 navigate('/profile')
               } else {                
-                navigate('/control-pannel')
+                navigate('/control-panel')
               }
             })
           })}
