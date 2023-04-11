@@ -7,7 +7,7 @@ import HomePage from './pages/HomePage';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
-import Admin from './pages/AdminPannel';
+import Admin from './pages/AdminPanel';
 import { MantineProvider } from '@mantine/core';
 import MyTheme from './utils/myTheme';
 import './assets/styles/App.css';
