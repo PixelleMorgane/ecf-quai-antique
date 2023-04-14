@@ -46,7 +46,6 @@ function Login() {
       <Box maw={400} mx="auto" sx={{ padding: '80px 20px' }}>
         <form
           onSubmit={form.onSubmit((values) => {
-            // setSubmittedValues(JSON.stringify(values, null, 2))
             login(values)
             .then(user => {
               console.log(user)

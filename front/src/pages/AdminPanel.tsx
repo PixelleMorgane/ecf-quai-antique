@@ -26,8 +26,6 @@ const images = data.map((image) => (
     fit="cover"
     src={image}
     sx={(theme) => ({
-        // width: 300,
-        // height: 193,
         display: 'flex',
         alignItems: 'center',
     })}

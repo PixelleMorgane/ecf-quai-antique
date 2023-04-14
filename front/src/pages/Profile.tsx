@@ -25,7 +25,6 @@ function Profile() {
         <Box>
            <Text>Hello {user?.firstName} {user?.lastName} !</Text>
            <Button 
-            // type="submit" 
             className='button' 
             color="dark" size="md" 
             compact 

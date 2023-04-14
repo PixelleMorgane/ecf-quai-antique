@@ -24,7 +24,6 @@ export type CurrentUserContextType = {
   setUser: Dispatch<SetStateAction<User | null>>;
 };
 
-// const value = useContext(SomeContext)
 export const CurrentUserContext = createContext<CurrentUserContextType>({
   user: null,
   setUser: () => {},

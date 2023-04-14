@@ -35,14 +35,13 @@ export async function login (
         password: string;
   }) {
 
-    // let hashedPassword = await bcrypt.hash(values.password, 8);
-
     return  axios.post(`${apiHostName}/users/login`, {
         email: values.email,
         password: values.password,
     })
       .then(res => {
         const user = res.data;
+        console.log(user)
         return user
     })
     .catch((error) => {

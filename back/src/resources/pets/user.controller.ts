@@ -123,12 +123,8 @@ UserController.post('/register', async function(req,res) {
         throw new BadRequestException('The email is already in use')  
     } 
   
-
-    // let hashedPassword = await bcrypt.hash(password, 8);
-    // console.log(hashedPassword);
-
     const resultInsert = await db.query('INSERT INTO users (id, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)', [ `${uuidv4()}`, firstName, lastName, email, password ])
-    return res.status(201).json('coucou')
+    return res.status(201).json()
 })
 
 
@@ -140,14 +136,19 @@ UserController.post('/login', async function(req,res) {
     const emailResult = await db.query('SELECT * FROM users WHERE email = ? ', [email]);
     console.log(emailResult)
 
+    const isSamePassword = await bcrypt.compare(password, emailResult[0].password)
+    console.log(isSamePassword)
+
     if (emailResult.length === 0) {
         return res.status(400).json('Unknown user')         
+    } else if (!isSamePassword) {
+        return res.status(400).json('Unknown user') 
     } else {
-        const isSamePassword = await bcrypt.compare(password, emailResult[0].password)
-        console.log(isSamePassword)
+        // TO DO enlever password
+        const result = await db.query('SELECT id, email, first_name, last_name, is_admin FROM users WHERE email = ? ', [email]);
+        console.log(result)
+        return res.status(200).json(result[0])
     }
-    // TO DO enlever password
-    return res.status(200).json(emailResult[0])
 })
 
 

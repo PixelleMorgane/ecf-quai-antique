@@ -8,7 +8,7 @@ import { register } from '../utils/api';
 import { PasswordInput, MultiSelect, TextInput, Title, Button, Box, Code, useMantineTheme } from '@mantine/core';
 
 const data = [
-  { value: 'gluten', label: 'Gulten' },
+  { value: 'gluten', label: 'Gluten' },
   { value: 'lactose', label: 'Lactose' },
   { value: 'huitre', label: 'Huîtres' },
   { value: 'oeuf', label: 'Oeufs' },
@@ -57,7 +57,6 @@ function Register() {
       <Box maw={400} mx="auto" sx={{ padding: '80px 20px' }}>
         <form
           onSubmit={form.onSubmit((values) => {
-            // setSubmittedValues(JSON.stringify(values, null, 2))
             register(values)
             .then(value => {
               console.log(user)
