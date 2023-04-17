@@ -144,10 +144,9 @@ UserController.post('/login', async function(req,res) {
     } else if (!isSamePassword) {
         return res.status(400).json('Unknown user') 
     } else {
-        // TO DO enlever password
-        const result = await db.query('SELECT id, email, first_name, last_name, is_admin FROM users WHERE email = ? ', [email]);
-        console.log(result)
-        return res.status(200).json(result[0])
+        const { password, ...restUserData } = emailResult[0]
+        console.log(restUserData);
+        return res.status(200).json(restUserData)
     }
 })
 
