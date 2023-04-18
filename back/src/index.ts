@@ -1,21 +1,21 @@
 import cors from 'cors'
 import express from 'express'
 import { config } from '~/config'
-import { PetsController } from '~/resources/pets/pets.controller'
+import { UserController } from '~/resources/pets/user.controller'
 import { ExceptionsHandler } from '~/middlewares/exceptions.handler'
 import { UnknownRoutesHandler } from '~/middlewares/unknownRoutes.handler'
 
 /**
  * On créé une nouvelle "application" express
  */
-const app = express()
+const app = express()  // Initialise le serveur
 
 /**
  * On dit à Express que l'on souhaite parser le body des requêtes en JSON
  *
  * @example app.post('/', (req) => req.body.prop)
  */
-app.use(express.json())
+app.use(express.json()) 
 
 /**
  * On dit à Express que l'on souhaite autoriser tous les noms de domaines
@@ -26,7 +26,7 @@ app.use(cors())
 /**
  * Toutes les routes CRUD pour les animaux seronts préfixées par `/pets`
  */
-app.use('/pets', PetsController)
+app.use('/users', UserController)
 
 /**
  * Homepage (uniquement necessaire pour cette demo)
