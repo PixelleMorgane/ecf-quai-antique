@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Admin from './pages/AdminPanel';
+import Dishes from './pages/Dishes';
 import { MantineProvider } from '@mantine/core';
 import MyTheme from './utils/myTheme';
 import './assets/styles/App.css';
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
   {
     path: "/control-panel",
     element: <Admin />,
+  },
+  {
+    path: "/dishes",
+    element: <Dishes />,
   },
 ]);
 

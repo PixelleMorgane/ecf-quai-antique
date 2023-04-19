@@ -11,12 +11,12 @@ function MyHeader() {
   const [opened, setOpened] = useState(false);
   const {user, setUser} = useContext(CurrentUserContext);
   console.log(user)
-  
+
   const useStyles = createStyles((theme) => ({
     link: {
       textAlign: 'center',
       fontFamily: "'Playfair Display', serif",
-      marginBottom: 5 
+      marginBottom: 5
     },
   }));
 
@@ -26,18 +26,18 @@ function MyHeader() {
   };
 
   const navigate = useNavigate();
-  
+
   const { classes } = useStyles();
 
   const route = (path: string) => {
     navigate(path);
   }
-  
+
 
   return (
       <Header height={{ base: 50, md: 70 }} p="md">
       <Box style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100%', position: 'relative' }}>
-        
+
           <Image
               width={88}
               height={40}
@@ -45,15 +45,14 @@ function MyHeader() {
               alt="Logo du restaurant le Quai Antique"
               onClick={() => route('/')}
           />
-       
+
         <MantineProvider
           theme={{
             components: {
-              
+
               Navbar: {
-                // Use raw styles object if you do not need theme dependency
                 styles: {
-                  root: { 
+                  root: {
                     height: 50,
                     width: 400,
                     display: 'flex',
@@ -67,20 +66,20 @@ function MyHeader() {
             },
           }}
         >
-          <MediaQuery smallerThan="sm" styles={{ 
-            width: '300px', 
-            height: '100vh', 
-            position: 'absolute', 
-            top: 30, 
-            left: 0, 
+          <MediaQuery smallerThan="sm" styles={{
+            width: '300px',
+            height: '100vh',
+            position: 'absolute',
+            top: 30,
+            left: 0,
             margin: 0,
             flexDirection: 'column',
-            justifyContent: 'flex-start' 
+            justifyContent: 'flex-start'
             }}>
-            
-            <Navbar 
-              hiddenBreakpoint="sm" 
-              hidden={!opened}          
+
+            <Navbar
+              hiddenBreakpoint="sm"
+              hidden={!opened}
               sx={(theme) => ({
                 width: 400,
                 margin: 0,
@@ -90,6 +89,7 @@ function MyHeader() {
                 padding: theme.spacing.xl,
               })}
             >
+              <NavLink className={classes.link} label="Carte" component="a" href="dishes" />
               {user
                 ?  (
                 <Box
@@ -102,12 +102,12 @@ function MyHeader() {
                   })}
                 >
                   <NavLink className={classes.link} label="Profile" onClick={() => route('profile')} />
-                  <Button 
-                    className='button' 
-                    color="dark" 
+                  <Button
+                    className='button'
+                    color="dark"
                     size="md"
-                    variant="outline" 
-                    compact 
+                    variant="outline"
+                    compact
                     style={{ marginTop: 15 }}
                     onClick={() => logout()}
                   >
@@ -131,7 +131,7 @@ function MyHeader() {
                   )
               }
               <NavLink className={classes.link} label="Carte" component="a" href="#" />
-              <Button className='button' color="dark" size="md" compact style={{ margin: 5 }}>Réserver</Button> 
+              <Button className='button' color="dark" size="md" compact style={{ margin: 5 }}>Réserver</Button>
 
             </Navbar>
           </MediaQuery>
