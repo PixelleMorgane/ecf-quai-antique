@@ -1,6 +1,7 @@
 import { Image, Text, Title, Box, Button, useMantineTheme } from '@mantine/core';
 import { useContext, useState } from 'react';
 import { CurrentUserContext } from '../App';
+import Banner from '../components/Banner';
 import { login } from '../utils/api';
 import { useNavigate } from 'react-router-dom';
 
@@ -23,8 +24,8 @@ function Profile() {
 
     return (
         <Box>
-           <Text>Hello {user?.firstName} {user?.lastName} !</Text>
-           <Button 
+          <Banner />
+          <Button 
             className='button' 
             color="dark" size="md" 
             compact 
