@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { CurrentUserContext } from '../App';
 import logo from '../assets/images/logo-qa-noir.png';
 import { Header, MantineProvider, Anchor, Image, Burger, MediaQuery, Button, Box, Navbar, NavLink, createStyles } from '@mantine/core';
 import MyTheme from '../utils/myTheme';
@@ -7,6 +8,7 @@ import MyTheme from '../utils/myTheme';
 function MyHeader() {
   const theme = {MyTheme};
   const [opened, setOpened] = useState(false);
+  const {user, setUser} = useContext(CurrentUserContext);
   
   const useStyles = createStyles((theme) => ({
     link: {
@@ -74,12 +76,27 @@ function MyHeader() {
                 padding: theme.spacing.xl,
               })}
             >
+              {user
+                ?  <NavLink className={classes.link} label="Profile" component="a" href="profile" />
+                : (
+                    <Box
+                    sx={(theme) => ({
+                      margin: 0,
+                      padding: 0,
+                      display: 'flex',
+                      justifyContent: 'space-around',
+                      alignItems: 'center',
+                    })}
+                    >
+                      <NavLink className={classes.link} label="Connexion" component="a" href="login" />
+                      <NavLink className={classes.link} label="Inscription" component="a" href="register" />
+                    </Box>
+                  )
+              }
               <NavLink className={classes.link} label="Carte" component="a" href="#" />
-              <NavLink className={classes.link} label="Connexion" component="a" href="login" />
-              <NavLink className={classes.link} label="Inscription" component="a" href="register" />
               <Button className='button' color="dark" size="md" compact style={{ margin: 5 }}>Réserver</Button> 
-            </Navbar>
 
+            </Navbar>
           </MediaQuery>
         </MantineProvider>
         <MediaQuery largerThan="sm" styles={{ display: 'none' }}>

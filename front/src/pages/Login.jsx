@@ -4,7 +4,7 @@ import { CurrentUserContext } from '../App';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
 import { login } from '../utils/api';
-import { PasswordInput, TextInput, Title, Button, Box, Code, useMantineTheme } from '@mantine/core';
+import { PasswordInput, TextInput, Title, Button, Box, useMantineTheme } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
 
 

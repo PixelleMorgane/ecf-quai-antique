@@ -6,7 +6,6 @@ import {v4 as uuidv4} from 'uuid';
 import bcrypt from 'bcryptjs';
 
 const db = require('../../config/database');
-// const bcrypt = require('bcrypt');
 
 /**
  * Nous créeons un `Router` Express, il nous permet de créer des routes en dehors du fichier `src/index.ts`
@@ -126,6 +125,7 @@ UserController.post('/register', async function(req,res) {
     const resultInsert = await db.query('INSERT INTO users (id, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)', [ `${uuidv4()}`, firstName, lastName, email, password ])
     return res.status(201).json()
 })
+
 
 
 
