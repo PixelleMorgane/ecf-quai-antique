@@ -1,4 +1,4 @@
-import React, {Dispatch, SetStateAction} from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { createContext, useContext, useState } from 'react';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Header from './components/Header';

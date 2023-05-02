@@ -1,8 +1,32 @@
+import React, {useEffect, useState} from 'react';
 import { List, Text, Title, Box, useMantineTheme } from '@mantine/core';
+import { dishes } from '../utils/api';
+
+interface Meals {
+    id: string; 
+    title: string; 
+    description: string; 
+    price: number; 
+    categoryId: string;
+}
 
 function Dishes() {
 
+    const [meals, setMeals] = useState<Meals[]>([]);
+
     const theme = useMantineTheme();
+
+    useEffect(() => {
+        dishes()
+        .then((apiMeals: Meals[]) => {
+            setMeals(apiMeals)
+        })
+        .catch()
+    },[])
+
+    let result = meals.map(({id, title, description, price, categoryId}: Meals) => (
+       <List.Item>{title}</List.Item>   
+    ))
 
     return (
         <Box>
@@ -81,6 +105,7 @@ function Dishes() {
                     <Box sx={{ margin: 10 }}>
                         <Title order={3}>Entrées</Title> 
                         <List listStyleType="none" >
+                                
                                 <List.Item>Lorem ipsum dolor</List.Item>  
                                 <List.Item>Lorem ipsum dolor</List.Item>  
                                 <List.Item>Lorem ipsum dolor</List.Item>  

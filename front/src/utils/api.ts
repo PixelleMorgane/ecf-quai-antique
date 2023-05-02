@@ -50,3 +50,18 @@ export async function login (
     })
 }
 
+export async function dishes () {
+
+    return  axios.get(`${apiHostName}/menus/dishes`)
+      .then(res => {
+        const fetchDishes = [...res.data];
+        console.log(fetchDishes)
+        return fetchDishes
+    })
+    .catch((error) => {
+        // to do treat error
+        console.log(error);
+        return []
+    })
+}
+
