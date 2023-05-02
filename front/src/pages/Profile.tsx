@@ -5,6 +5,7 @@ import { useContext, useState } from 'react';
 import { CurrentUserContext } from '../App';
 import Banner from '../components/Banner';
 import { login } from '../utils/api';
+import Page from '../components/page';
 import { useNavigate } from 'react-router-dom';
 
 function Profile() {
@@ -22,19 +23,14 @@ function Profile() {
     });
 
     const logout = () => {
-        setUser({
-            firstName: '',
-            lastName: '',
-            email: '',
-            isAdmin: 0,
-        })
-        navigate('/home')
+        setUser(null)
+        navigate('/')
     };
 
     console.log(user)
 
     return (
-        <Box>
+        <Page>
           <Banner />
           <Box
             style={{ padding: 30 }}
@@ -76,12 +72,12 @@ function Profile() {
             color="dark" size="md" 
             compact 
             style={{ marginTop: 15 }}
-            onClick={logout}
+            onClick={() => logout()}
           >
             Déconnexion
           </Button> 
           </Box>
-        </Box>
+        </Page>
     )
 }
 

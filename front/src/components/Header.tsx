@@ -3,12 +3,14 @@ import { CurrentUserContext } from '../App';
 import logo from '../assets/images/logo-qa-noir.png';
 import { Header, MantineProvider, Anchor, Image, Burger, MediaQuery, Button, Box, Navbar, NavLink, createStyles } from '@mantine/core';
 import MyTheme from '../utils/myTheme';
+import { useNavigate } from 'react-router-dom';
 
 
 function MyHeader() {
   const theme = {MyTheme};
   const [opened, setOpened] = useState(false);
   const {user, setUser} = useContext(CurrentUserContext);
+  console.log(user)
   
   const useStyles = createStyles((theme) => ({
     link: {
@@ -17,21 +19,28 @@ function MyHeader() {
       marginBottom: 5 
     },
   }));
+
+  const navigate = useNavigate();
   
   const { classes } = useStyles();
+
+  const route = (path: string) => {
+    navigate(path);
+  }
   
 
   return (
       <Header height={{ base: 50, md: 70 }} p="md">
       <Box style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100%', position: 'relative' }}>
-        <Anchor href="/">
+        
           <Image
               width={88}
               height={40}
               src={logo}
               alt="Logo du restaurant le Quai Antique"
+              onClick={() => route('/')}
           />
-        </Anchor>
+       
         <MantineProvider
           theme={{
             components: {
@@ -77,7 +86,7 @@ function MyHeader() {
               })}
             >
               {user
-                ?  <NavLink className={classes.link} label="Profile" component="a" href="profile" />
+                ?  <NavLink className={classes.link} label="Profile" onClick={() => route('profile')} />
                 : (
                     <Box
                     sx={(theme) => ({
@@ -88,8 +97,8 @@ function MyHeader() {
                       alignItems: 'center',
                     })}
                     >
-                      <NavLink className={classes.link} label="Connexion" component="a" href="login" />
-                      <NavLink className={classes.link} label="Inscription" component="a" href="register" />
+                      <NavLink className={classes.link} label="Connexion" onClick={() => route('login')} />
+                      <NavLink className={classes.link} label="Inscription" onClick={() => route('register')} />
                     </Box>
                   )
               }

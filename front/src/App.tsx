@@ -64,9 +64,7 @@ function App() {
           setUser: setCurrentUser,
         }}
       >
-        <Header />
-          <RouterProvider router={router} />
-        <Footer />
+        <RouterProvider router={router} />
       </CurrentUserContext.Provider>
     </MantineProvider>
   );

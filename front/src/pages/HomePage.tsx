@@ -2,13 +2,14 @@ import chef from '../assets/images/chef.jpg'
 import heroImage from '../assets/images/hero-image.jpg'
 import CarouselComponent from '../components/CarouselComponent'
 import { Image, Text, Title, Box, useMantineTheme } from '@mantine/core';
+import Page from '../components/page';
 
 function HomePage() {
 
     const theme = useMantineTheme();
 
     return (
-        <Box>
+        <Page>
             <Box
                 sx={{ 
                     backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
@@ -78,7 +79,7 @@ function HomePage() {
                     <CarouselComponent />       
                 </Box>
             </Box>
-        </Box>
+        </Page>
     )
 }
 
