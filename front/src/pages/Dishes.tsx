@@ -10,23 +10,27 @@ interface Meals {
     categoryId: string;
 }
 
+type ApiMeals = {
+    entree: Meals[];
+    dish: Meals[];
+    dessert: Meals[];
+}
+
 function Dishes() {
 
-    const [meals, setMeals] = useState<Meals[]>([]);
+    const [meals, setMeals] = useState<ApiMeals>();
 
     const theme = useMantineTheme();
 
     useEffect(() => {
         dishes()
-        .then((apiMeals: Meals[]) => {
+        .then((apiMeals: ApiMeals) => {
             setMeals(apiMeals)
         })
         .catch()
     },[])
-
-    let result = meals.map(({id, title, description, price, categoryId}: Meals) => (
-       <List.Item>{title}</List.Item>   
-    ))
+    
+    console.log(meals)
 
     return (
         <Box>
@@ -105,52 +109,25 @@ function Dishes() {
                     <Box sx={{ margin: 10 }}>
                         <Title order={3}>Entrées</Title> 
                         <List listStyleType="none" >
-                                
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                        </List>
-                    </Box>
-                    <Box sx={{ margin: 10 }}>
-                        <Title order={3}>Salades</Title> 
-                        <List listStyleType="none" >
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                                <List.Item>Lorem ipsum dolor</List.Item>  
+                                {meals && meals.entree.map((entree) => (
+                                    <List.Item key={entree.id}>{entree.title} {entree.price}€</List.Item>  
+                                ))}
                         </List>
                     </Box>
                     <Box sx={{ margin: 10 }}>
                         <Title order={3}>Plats</Title> 
                         <List listStyleType="none" >
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                        </List>
-                    </Box>
-                    <Box sx={{ margin: 10 }}>
-                        <Title order={3}>Burgers</Title> 
-                        <List listStyleType="none" >
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                                <List.Item>Lorem ipsum dolor</List.Item>  
+                                {meals && meals.dish.map((dish) => (
+                                    <List.Item key={dish.id}>{dish.title} {dish.price}€</List.Item>  
+                                ))} 
                         </List>
                     </Box>
                     <Box sx={{ margin: 10 }}>
                         <Title order={3}>Desserts</Title> 
                         <List listStyleType="none" >
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                                <List.Item>Lorem ipsum dolor</List.Item>  
-                                <List.Item>Lorem ipsum dolor</List.Item>  
+                                {meals && meals.dessert.map((dessert) => (
+                                    <List.Item key={dessert.id}>{dessert.title} {dessert.price}€</List.Item>  
+                                ))}  
                         </List>
                     </Box>
                 </Box>

@@ -116,12 +116,34 @@ const DishesController = Router()
 
 DishesController.get('/dishes', async function(req,res) {
         
-    const dishResult = await db.query('SELECT * FROM dishes LIMIT 100');
-    console.log(dishResult)
+    // const dishResult = await db.query('SELECT * FROM dishes LIMIT 100');
+    // console.log(dishResult)
 
-    return res.status(200).json(dishResult)
+    // return res.status(200).json(dishResult)
+
+    const idEntree = '647a6da6-09b4-4182-8206-81232e27fee9';
+    const idDish = '38ca1758-01b4-4589-bbf6-6bfc852bad29';
+    const idDessert = '4e429783-8ea0-4571-b966-df141dc96e48';
+
+    const entreeResult = await db.query('SELECT * FROM dishes WHERE category_id = ? ', [idEntree]);
+    const dishResult = await db.query('SELECT * FROM dishes WHERE category_id = ? ', [idDish]);
+    const dessertResult = await db.query('SELECT * FROM dishes WHERE category_id = ? ', [idDessert]);
+
+    console.log(entreeResult);
+    console.log(dishResult);
+    console.log(dessertResult);
+
+    const mealResult = {
+        entree: entreeResult,
+        dish: dishResult,
+        dessert: dessertResult
+    }
+
+    console.log(mealResult)
+
+    return res.status(200).json(mealResult);
 })
-
+ 
 
 /**
  * On expose notre controller pour l'utiliser dans `src/index.ts`
