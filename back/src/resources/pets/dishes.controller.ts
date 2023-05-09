@@ -143,6 +143,46 @@ DishesController.get('/dishes', async function(req,res) {
 
     return res.status(200).json(mealResult);
 })
+
+
+DishesController.post('/control-panel', async function(req,res) {
+    console.log(req.body);
+    const { plateName, price, categoryId } = req.body;
+    let catID;
+
+    switch (categoryId) {
+        case 'entree':
+            catID = '647a6da6-09b4-4182-8206-81232e27fee9'; 
+            break;
+        case 'dish':
+            catID = '38ca1758-01b4-4589-bbf6-6bfc852bad29'; 
+            break;
+        case 'dessert':
+            catID = '4e429783-8ea0-4571-b966-df141dc96e48'; 
+            break;
+        default:
+            catID = '647a6da6-09b4-4182-8206-81232e27fee9'; 
+    }
+
+    const dishExist = await db.query('SELECT title from dishes WHERE title = ?', [plateName]) ;
+   
+    if (dishExist.length > 0) {
+        throw new BadRequestException('This dish already exist')  
+    } 
+    
+  
+    const resultInsert = await db.query('INSERT INTO dishes (id, title, price,category_id) VALUES (?, ?, ?, ?)', [ `${uuidv4()}`, plateName, price, catID ])
+    return res.status(201).json()
+})
+
+// DishesController.delete('/control-panel', async function(req,res) {
+//     console.log(req.body);
+//     const { id } = req.body;
+    
+  
+//     const deleteRow = await db.query('DELETE from dishes WHERE id = ?', [id])
+//     return res.status(200).json()
+// })
  
 
 /**

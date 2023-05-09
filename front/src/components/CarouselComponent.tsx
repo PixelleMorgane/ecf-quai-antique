@@ -17,7 +17,7 @@ const data = [
     image: plat2
   },
   {
-    title: 'Buger Chambérien',
+    title: 'Burger Chambérien',
     image: plat3
   },
   {

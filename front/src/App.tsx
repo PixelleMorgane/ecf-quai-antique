@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { createContext, useContext, useState } from 'react';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import PrivateRoutes from './components/PrivateRoutes';
+import ProfilePrivateRoute from './components/ProfilePrivateRoute';
 import AdminPrivateRoute from './components/AdminPrivateRoute';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    element: <PrivateRoutes />,
+    element: <ProfilePrivateRoute />,
     children: [
       {
         path: "/profile",
@@ -59,7 +59,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/control-panel",
-        element: <Profile />,
+        element: <Admin />,
       },
     ]
   },

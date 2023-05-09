@@ -1,5 +1,5 @@
 import heroImage from '../assets/images/plat-1.jpg'
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { CurrentUserContext } from '../App';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
@@ -14,7 +14,16 @@ function Login() {
   const theme = useMantineTheme();
   const [submittedValues, setSubmittedValues] = useState('');
   const [visible, { toggle }] = useDisclosure(false);
-  const {user, setUser} = useContext(CurrentUserContext)
+  const {user, setUser} = useContext(CurrentUserContext);
+
+  useEffect(() => {
+    if(user === null){return;}
+    if(user.is_admin === 0) {
+      navigate('/profile')
+    } else {                
+      navigate('/control-panel')
+    }
+  },[user]);
 
   const form = useForm({
     initialValues: {
@@ -54,12 +63,7 @@ function Login() {
                 lastName: user.last_name,
                 email: user.email,
                 isAdmin: user.is_admin,
-              })
-              if(user.is_admin === 0) {
-                navigate('/profile')
-              } else {                
-                navigate('/control-panel')
-              }
+              }) 
             })
           })}
         >

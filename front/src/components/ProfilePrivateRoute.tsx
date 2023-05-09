@@ -3,7 +3,7 @@ import { useContext, useState } from 'react';
 import { CurrentUserContext } from '../App';
 
 
-const PrivateRoutes = () => {
+const ProfilePrivateRoute = () => {
 
   const {user, setUser} = useContext(CurrentUserContext);
 
@@ -12,4 +12,4 @@ return (
   )
 }
 
-export default PrivateRoutes
+export default ProfilePrivateRoute
