@@ -91,17 +91,47 @@ export async function addDish (
     })
 }
 
-// export async function deleteDish () {
 
 
-//     return axios.post(`${apiHostName}/menus/control-panel`)
-//     .then((res) => {
-//         // to do treat response
-//         return res.data
-//     })
-//     .catch((error) => {
-//         // to do treat error
-//         console.log(error);
-//     })
-// }
+export async function deleteDish (
+    id: string
+) 
+{
+
+    return axios.delete(`${apiHostName}/menus/control-panel?id=${id}`)
+    .then((res) => {
+        // to do treat response
+        return res.data
+    })
+    .catch((error) => {
+        // to do treat error
+        console.log(error);
+    })
+}
+
+
+
+export async function updateDish (
+    values: {
+        key: string;
+        title: string;
+        price: number;
+    }) 
+{
+
+console.log(values)
+    return axios.patch(`${apiHostName}/menus/control-panel`, {
+        id: values.key,
+        title: values.title,
+        price: values.price,
+    })
+    .then((res) => {
+        // to do treat response
+        return res.data
+    })
+    .catch((error) => {
+        // to do treat error
+        console.log(error);
+    })
+}
 

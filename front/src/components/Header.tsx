@@ -89,7 +89,7 @@ function MyHeader() {
                 padding: theme.spacing.xl,
               })}
             >
-              <NavLink className={classes.link} label="Carte" component="a" href="dishes" />
+              <NavLink className={classes.link} label="Carte" onClick={() => route('dishes')} />
               {user
                 ?  (
                 <Box
@@ -130,7 +130,7 @@ function MyHeader() {
                     </Box>
                   )
               }
-              <NavLink className={classes.link} label="Carte" component="a" href="#" />
+
               <Button className='button' color="dark" size="md" compact style={{ margin: 5 }}>Réserver</Button>
 
             </Navbar>

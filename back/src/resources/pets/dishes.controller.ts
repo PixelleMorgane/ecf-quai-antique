@@ -175,14 +175,31 @@ DishesController.post('/control-panel', async function(req,res) {
     return res.status(201).json()
 })
 
-// DishesController.delete('/control-panel', async function(req,res) {
-//     console.log(req.body);
-//     const { id } = req.body;
+
+
+
+DishesController.delete('/control-panel', async function(req,res) {
+    
+    const { id } = req.query;
     
   
-//     const deleteRow = await db.query('DELETE from dishes WHERE id = ?', [id])
-//     return res.status(200).json()
-// })
+    const deleteRow = await db.query('DELETE from dishes WHERE id = ?', [id])
+    return res.status(200).json()
+})
+
+
+
+
+DishesController.patch('/control-panel', async function(req,res) {
+    console.log(req.body);
+    const { id, title, price } = req.body;
+
+    // const dishTitleExist = await db.query('SELECT title from dishes WHERE title = ?', [title]);
+   
+    const updateRow = await db.query('UPDATE dishes SET title = ?, price = ? WHERE id = ?', [title , price , id])
+  
+    return res.status(200).json()
+})
  
 
 /**
