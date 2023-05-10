@@ -22,11 +22,6 @@ function Profile() {
       },
     });
 
-    const logout = () => {
-        setUser(null)
-        navigate('/')
-    };
-
     console.log(user)
 
     return (
@@ -66,16 +61,7 @@ function Profile() {
             <Box sx={{ marginTop: 20 }}>
               <Title order={2}>Mes réservations</Title>
               <Text>Vous n'avez encore fait aucune réservation</Text>
-            </Box>
-          <Button 
-            className='button' 
-            color="dark" size="md" 
-            compact 
-            style={{ marginTop: 15 }}
-            onClick={() => logout()}
-          >
-            Déconnexion
-          </Button> 
+            </Box> 
           </Box>
         </Page>
     )

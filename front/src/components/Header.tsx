@@ -20,6 +20,11 @@ function MyHeader() {
     },
   }));
 
+  const logout = () => {
+    setUser(null)
+    navigate('/')
+  };
+
   const navigate = useNavigate();
   
   const { classes } = useStyles();
@@ -86,7 +91,30 @@ function MyHeader() {
               })}
             >
               {user
-                ?  <NavLink className={classes.link} label="Profile" onClick={() => route('profile')} />
+                ?  (
+                <Box
+                  sx={(theme) => ({
+                    margin: 0,
+                    padding: 0,
+                    display: 'flex',
+                    justifyContent: 'space-around',
+                    alignItems: 'center',
+                  })}
+                >
+                  <NavLink className={classes.link} label="Profile" onClick={() => route('profile')} />
+                  <Button 
+                    className='button' 
+                    color="dark" 
+                    size="md"
+                    variant="outline" 
+                    compact 
+                    style={{ marginTop: 15 }}
+                    onClick={() => logout()}
+                  >
+                    Déconnexion
+                  </Button>
+                </Box>
+                )
                 : (
                     <Box
                     sx={(theme) => ({
