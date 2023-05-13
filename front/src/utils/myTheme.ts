@@ -26,18 +26,6 @@ const myTheme: MantineThemeOverride = {
       "#333333",
       "#1A1A1A"
     ],
-    tertiary: [
-      "#FBF7E9",
-      "#F4E9C2",
-      "#EDDB9C",
-      "#E6CD75",
-      "#DFBF4E",
-      "#D8B127",
-      "#AD8E1F",
-      "#826A17",
-      "#564710",
-      "#2B2308"
-    ],
   },
   
   fontFamily: "'Montserrat', sans-serif",

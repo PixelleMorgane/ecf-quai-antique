@@ -7,6 +7,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import Register from './pages/Register';
+import Booking from './components/Booking';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Admin from './pages/AdminPanel';

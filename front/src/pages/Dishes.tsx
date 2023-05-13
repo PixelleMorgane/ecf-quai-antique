@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { List, Text, Title, Box, useMantineTheme } from '@mantine/core';
 import { dishes } from '../utils/api';
+import Page from '../components/page';
 
 interface Meals {
     id: string; 
@@ -33,7 +34,7 @@ function Dishes() {
     console.log(meals)
 
     return (
-        <Box>
+        <Page>
             <Box
             sx={{ 
                 backgroundColor: '#000',
@@ -132,7 +133,7 @@ function Dishes() {
                     </Box>
                 </Box>
             </Box>
-        </Box>
+        </Page>
     )
 }
 

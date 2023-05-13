@@ -14,13 +14,6 @@ function Profile() {
     const navigate = useNavigate();
     const {user, setUser} = useContext(CurrentUserContext)
 
-    console.log(`${user?.email}`)
-
-    const form = useForm({
-      initialValues: {
-        email: `${user?.email}`,
-      },
-    });
 
     console.log(user)
 
@@ -32,31 +25,9 @@ function Profile() {
           >
             <Box>
               <Title order={2}>Mes infos</Title>
-              <Text>Nom : {user?.lastName}<br />Prénom : {user?.firstName}</Text>
-              <form
-                // onSubmit={form.onSubmit((values) => {
-                //   login(values)
-                // })}
-              >
-                <TextInput
-                  icon={<IconAt  size={20}  />}
-                  sx={{ width: 300 }}
-                  label="changer votre email"
-                  id="email"
-                  placeholder="email"
-                  mt="md"
-                  {...form.getInputProps('email')}
-                />
-                <Button 
-                  type="submit" 
-                  className='button' 
-                  color="dark" size="md" 
-                  compact 
-                  style={{ marginTop: 15 }}
-                >
-                  Valider
-                </Button> 
-              </form>
+              <Text>Nom : {user?.lastName}</Text>
+              <Text>Prénom : {user?.firstName}</Text>
+              <Text>Email : {user?.email}</Text>
             </Box> 
             <Box sx={{ marginTop: 20 }}>
               <Title order={2}>Mes réservations</Title>

@@ -1,9 +1,11 @@
 import { useContext, useState } from 'react';
 import { CurrentUserContext } from '../App';
 import logo from '../assets/images/logo-qa-noir.png';
-import { Header, MantineProvider, Anchor, Image, Burger, MediaQuery, Button, Box, Navbar, NavLink, createStyles } from '@mantine/core';
+import { Header, MantineProvider, ActionIcon, Tooltip, Image, Burger, MediaQuery, Button, Box, Navbar, NavLink } from '@mantine/core';
 import MyTheme from '../utils/myTheme';
+import Booking from './Booking';
 import { useNavigate } from 'react-router-dom';
+import { IconLogout, } from '@tabler/icons-react';
 
 
 function MyHeader() {
@@ -12,14 +14,6 @@ function MyHeader() {
   const {user, setUser} = useContext(CurrentUserContext);
   console.log(user)
 
-  const useStyles = createStyles((theme) => ({
-    link: {
-      textAlign: 'center',
-      fontFamily: "'Playfair Display', serif",
-      marginBottom: 5
-    },
-  }));
-
   const logout = () => {
     setUser(null)
     navigate('/')
@@ -27,15 +21,13 @@ function MyHeader() {
 
   const navigate = useNavigate();
 
-  const { classes } = useStyles();
-
   const route = (path: string) => {
     navigate(path);
   }
 
 
   return (
-      <Header height={{ base: 50, md: 70 }} p="md">
+      <Header height={{ base: 50, md: 70 }} p="xl">
       <Box style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100%', position: 'relative' }}>
 
           <Image
@@ -54,7 +46,7 @@ function MyHeader() {
                 styles: {
                   root: {
                     height: 50,
-                    width: 400,
+                    minWidth: '350px',
                     display: 'flex',
                     flexDirection: 'row',
                     justifyContent: 'space-around',
@@ -81,7 +73,7 @@ function MyHeader() {
               hiddenBreakpoint="sm"
               hidden={!opened}
               sx={(theme) => ({
-                width: 400,
+                width: 250,
                 margin: 0,
                 display: 'flex',
                 justifyContent: 'space-around',
@@ -89,7 +81,7 @@ function MyHeader() {
                 padding: theme.spacing.xl,
               })}
             >
-              <NavLink className={classes.link} label="Carte" onClick={() => route('dishes')} />
+              <NavLink label="Carte" onClick={() => route('dishes')} />
               {user
                 ?  (
                 <Box
@@ -101,18 +93,21 @@ function MyHeader() {
                     alignItems: 'center',
                   })}
                 >
-                  <NavLink className={classes.link} label="Profile" onClick={() => route('profile')} />
-                  <Button
-                    className='button'
-                    color="dark"
-                    size="md"
-                    variant="outline"
-                    compact
-                    style={{ marginTop: 15 }}
-                    onClick={() => logout()}
+
+                  <NavLink label="Profile" onClick={() => route('profile')} />
+                  <Tooltip
+                      label="Déconnexion"
+                      color="dark"
+                      withArrow
                   >
-                    Déconnexion
-                  </Button>
+                      <ActionIcon
+                          color="dark"
+                          variant="transparent"
+                          size="lg"
+                      >
+                          <IconLogout size={20} />
+                      </ActionIcon>
+                  </Tooltip>
                 </Box>
                 )
                 : (
@@ -125,13 +120,13 @@ function MyHeader() {
                       alignItems: 'center',
                     })}
                     >
-                      <NavLink className={classes.link} label="Connexion" onClick={() => route('login')} />
-                      <NavLink className={classes.link} label="Inscription" onClick={() => route('register')} />
+                      <NavLink label="Connexion" onClick={() => route('login')} />
+                      <NavLink label="Inscription" onClick={() => route('register')} />
                     </Box>
                   )
               }
-
-              <Button className='button' color="dark" size="md" compact style={{ margin: 5 }}>Réserver</Button>
+              <Booking />
+              {/* <Button className='button' color="dark" size="md" compact style={{ margin: 5 }}>Réserver</Button>  */}
 
             </Navbar>
           </MediaQuery>

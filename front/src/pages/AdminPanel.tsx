@@ -10,6 +10,7 @@ import { dishes } from '../utils/api';
 import { addDish } from '../utils/api';
 import { deleteDish } from '../utils/api';
 import { updateDish } from '../utils/api';
+import Page from '../components/page';
 import plat1 from '../assets/images/plat-1.jpg';
 import plat2 from '../assets/images/plat-2.jpg';
 import plat3 from '../assets/images/plat-3.jpg';
@@ -149,37 +150,8 @@ function Admin(props: Partial<DropzoneProps>) {
     }
 
     return (
-        <Box sx={{ display: 'flex' }}
-        >
-            <Box mr='lg'>
-                <Navbar  sx={{ backgroundColor: '#000', height: '100%'  }} p="xs" width={{ base: 300 }}>
-                    <Navbar.Section sx={{ margin: '15px 5px' }}>
-                        
-                    </Navbar.Section>
-                    <Navbar.Section grow mt="md">
-                        {/* Links sections */}
-                        <NavLink sx={{ color: 'white' }} label="Galerie" component="a" href="#" />
-                        <NavLink sx={{ color: 'white' }} label="Menus | Carte" component="a" href="#" />
-                        <NavLink sx={{ color: 'white' }} label="Horaires" component="a" href="#" />
-                    </Navbar.Section>
-                    <Navbar.Section
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'space-around',
-                            alignItems: 'center',
-                            color: 'white',
-                        }}
-                    >
-                        {/* Footer with user */}
-                        <Avatar radius="xl" size="lg" color="dark" src={logo} />
-                        <Box>
-                            <Text>Hello {user?.firstName} {user?.lastName} !</Text>
-                            <Badge color="gray" variant="filled">Admin</Badge>
-                        </Box>
-                    </Navbar.Section>
-                </Navbar>
-            </Box>
-            <Box>
+        <Page>
+            <Box sx={{ width: "100%", display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
                 <Box>
                     <Title order={2}>Les réservations</Title>
 
@@ -426,7 +398,7 @@ function Admin(props: Partial<DropzoneProps>) {
                     </Box>
                 </Box>
             </Box>
-        </Box>
+        </Page>
     )
 }
 

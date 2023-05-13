@@ -4,6 +4,7 @@ import { CurrentUserContext } from '../App';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
 import { login } from '../utils/api';
+import Page from '../components/page';
 import { PasswordInput, TextInput, Title, Button, Box, useMantineTheme } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,7 +19,7 @@ function Login() {
 
   useEffect(() => {
     if(user === null){return;}
-    if(user.is_admin === 0) {
+    if(user.isAdmin === 0) {
       navigate('/profile')
     } else {                
       navigate('/control-panel')
@@ -35,7 +36,7 @@ function Login() {
   });
 
   return (
-    <Box>
+    <Page>
       <Box
           sx={{ 
               backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
@@ -95,7 +96,7 @@ function Login() {
           </Button> 
         </form>
       </Box>
-    </Box>
+    </Page>
   );
 }
 
