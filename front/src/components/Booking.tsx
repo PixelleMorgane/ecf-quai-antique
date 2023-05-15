@@ -1,9 +1,10 @@
 import { TextInput, Select, Text, NumberInput, Modal, Box, Button, useMantineTheme } from '@mantine/core';
 import { Calendar } from '@mantine/dates';
-import { useForm } from '@mantine/form';
+import { useForm, matches } from '@mantine/form';
 import { IconAt  } from '@tabler/icons-react';
 import { useContext, useState } from 'react';
 import { CurrentUserContext } from '../App';
+import { addBooking } from '../utils/api';
 import MyTheme from '../utils/myTheme';
 import { login } from '../utils/api';
 import Page from '../components/page';
@@ -36,26 +37,40 @@ const data = [
     { value: '22:00', label: '22:00', group: 'Soir' },
 ]
 
+type Slot = {
+    nbPersons: number;
+    date: Date;
+    hours: string;
+    phone: string;
+    firstName: string;
+    lastName: string;
+}
+
 function Booking() {
 
     const theme = useMantineTheme();
     const navigate = useNavigate();
     const {user, setUser} = useContext(CurrentUserContext)
 
-    const [value, setValue] = useState<Date | null>(null);
-
+    const [value, setValue] = useState<Date | null>();
+    const [slot, setSlot] = useState<Slot>();
     const [opened, setOpened] = useState(false);
 
     const bookingForm = useForm({
         initialValues: {
-          firstName: `${user?.firstName}`,
-          lastName: `${user?.lastName}`,
-          phoneNumber: '',
-        }
+            nbPersons: 1,
+            date: new Date(),
+            hours: '',
+            phone: '',
+            firstName: '',
+            lastName: '',
+        },
+
+        validate: {
+            phone: matches(/^((\+)33|0|0033)[1-9](\d{2}){4}$/, 'Ce n\'est pas un numéro de téléphone valide'),
+        },
       });
 
-
-    console.log(user)
 
     return (
         <>
@@ -64,9 +79,14 @@ function Booking() {
                 opened={opened}
                 onClose={() => setOpened(false)}
                 title="Réservation"
+                style={{ zIndex: 99 }}
             >
             <form
-                // onSubmit={bookingForm.onSubmit((values) => setSubmittedValues(JSON.stringify(values, null, 2)))}
+                onSubmit={bookingForm.onSubmit((values) => {
+                    console.log(values)
+                    addBooking(values)
+                    .then()
+                })}            
             >
                 <TextInput
                 label="First name"
@@ -80,11 +100,10 @@ function Booking() {
                 {...bookingForm.getInputProps('lastName')}
                 />
                 <TextInput
-                type="number"
                 label="Numéro de téléphone"
                 placeholder=""
                 mt="md"
-                {...bookingForm.getInputProps('phoneNumber')}
+                {...bookingForm.getInputProps('phone')}
                 />
                 <NumberInput
                 label="Nombre de personnes"
@@ -98,36 +117,10 @@ function Booking() {
                     label="Heure d'arrivée"
                     placeholder="Choisissez une heure d'arrivée"
                     data={data}
+                    {...bookingForm.getInputProps('hours')}
                 />
-                <Calendar value={value} color='dark' onChange={setValue} locale="fr" />
-                {/* <Box>
-                    <Text>Heures du déjeuné</Text>
-                    <Button m={5} color="yellow" value={'12:00'}>12:00</Button>
-                    <Button m={5} color="yellow" value={'12:15'}>12:15</Button>
-                    <Button m={5} color="yellow" value={'12:30'}>12:30</Button>
-                    <Button m={5} color="yellow" value={'12:45'}>12:45</Button>
-                    <Button m={5} color="yellow" value={'13:00'}>13:00</Button>
-                    <Button m={5} color="yellow" value={'13:15'}>13:15</Button>
-                    <Button m={5} color="yellow" value={'13:30'}>13:30</Button>
-                    <Button m={5} color="yellow" value={'13:45'}>13:45</Button>
-                    <Button m={5} color="yellow" value={'14:00'}>14:00</Button>
-                </Box>
-                <Box>
-                <Text>Heures du diner</Text>
-                    <Button m={5} color="yellow" value={'19:00'}>19:00</Button>
-                    <Button m={5} color="yellow" value={'19:15'}>19:15</Button>
-                    <Button m={5} color="yellow" value={'19:30'}>19:30</Button>
-                    <Button m={5} color="yellow" value={'19:45'}>19:45</Button>
-                    <Button m={5} color="yellow" value={'20:00'}>20:00</Button>
-                    <Button m={5} color="yellow" value={'20:15'}>20:15</Button>
-                    <Button m={5} color="yellow" value={'20:30'}>20:30</Button>
-                    <Button m={5} color="yellow" value={'20:45'}>20:45</Button>
-                    <Button m={5} color="yellow" value={'21:00'}>21:00</Button>
-                    <Button m={5} color="yellow" value={'21:15'}>21:15</Button>
-                    <Button m={5} color="yellow" value={'21:30'}>21:30</Button>
-                    <Button m={5} color="yellow" value={'21:45'}>21:45</Button>
-                    <Button m={5} color="yellow" value={'22:00'}>22:00</Button>
-                </Box> */}
+                <Calendar {...bookingForm.getInputProps('date')} color='dark' locale="fr" />
+                
                 <Button mt={15} type="submit" color="dark" size="md" compact>
                 Valider
                 </Button>

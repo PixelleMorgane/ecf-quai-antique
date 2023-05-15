@@ -3,7 +3,7 @@ import { useContext, useState } from 'react';
 import { CurrentUserContext } from '../App';
 import { useNavigate } from 'react-router-dom';
 import { useDisclosure } from '@mantine/hooks';
-import { useForm } from '@mantine/form';
+import { useForm, matches } from '@mantine/form';
 import { register } from '../utils/api';
 import Page from '../components/page';
 import { PasswordInput, TextInput, Title, Button, Box, useMantineTheme } from '@mantine/core';
@@ -23,6 +23,10 @@ function Register() {
       lastName: '',
       email: '',
       password: ''
+    },
+
+    validate: {
+      password: matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/, 'Le mot de passe doit contenir au moins 8 caractères, 1 majuscule et 1 caractère spécial'),
     },
   });
 

@@ -12,8 +12,7 @@ function MyHeader() {
   const theme = {MyTheme};
   const [opened, setOpened] = useState(false);
   const {user, setUser} = useContext(CurrentUserContext);
-  console.log(user)
-
+  
   const logout = () => {
     setUser(null)
     navigate('/')
@@ -24,12 +23,12 @@ function MyHeader() {
   const route = (path: string) => {
     navigate(path);
   }
-
+  
 
   return (
       <Header height={{ base: 50, md: 70 }} p="xl">
-      <Box style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100%', position: 'relative' }}>
-
+      <Box style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 98, height: '100%', position: 'relative' }}>
+        
           <Image
               width={88}
               height={40}
@@ -37,14 +36,14 @@ function MyHeader() {
               alt="Logo du restaurant le Quai Antique"
               onClick={() => route('/')}
           />
-
+       
         <MantineProvider
           theme={{
             components: {
-
+              
               Navbar: {
                 styles: {
-                  root: {
+                  root: { 
                     height: 50,
                     minWidth: '350px',
                     display: 'flex',
@@ -58,20 +57,23 @@ function MyHeader() {
             },
           }}
         >
-          <MediaQuery smallerThan="sm" styles={{
-            width: '300px',
-            height: '100vh',
-            position: 'absolute',
-            top: 30,
-            left: 0,
+          <MediaQuery 
+          smallerThan="sm" 
+          styles={{ 
+            width: '300px', 
+            height: '100vh', 
+            position: 'absolute', 
+            top: 25, 
+            left: '-30px', 
             margin: 0,
             flexDirection: 'column',
-            justifyContent: 'flex-start'
-            }}>
-
-            <Navbar
-              hiddenBreakpoint="sm"
-              hidden={!opened}
+            justifyContent: 'flex-start' 
+            }}
+          >
+            
+            <Navbar 
+              hiddenBreakpoint="sm" 
+              hidden={!opened}          
               sx={(theme) => ({
                 width: 250,
                 margin: 0,
@@ -81,48 +83,67 @@ function MyHeader() {
                 padding: theme.spacing.xl,
               })}
             >
-              <NavLink label="Carte" onClick={() => route('dishes')} />
+              <Box>
+                <NavLink label="Carte" onClick={() => route('/dishes')} />
+              </Box>
               {user
                 ?  (
-                <Box
-                  sx={(theme) => ({
-                    margin: 0,
-                    padding: 0,
-                    display: 'flex',
-                    justifyContent: 'space-around',
-                    alignItems: 'center',
-                  })}
-                >
-
-                  <NavLink label="Profile" onClick={() => route('profile')} />
-                  <Tooltip
-                      label="Déconnexion"
-                      color="dark"
-                      withArrow
+                  <MediaQuery 
+                    smallerThan="sm" 
+                    styles={{ 
+                      flexDirection: 'column',
+                      justifyContent: 'flex-start' 
+                      }}
                   >
-                      <ActionIcon
+                    <Box
+                      sx={(theme) => ({
+                        margin: 0,
+                        padding: 0,
+                        display: 'flex',
+                        justifyContent: 'space-around',
+                        alignItems: 'center',
+                      })}
+                    >
+
+                      <NavLink label="Profile" onClick={() => route('/profile')} />
+                      <Tooltip
+                          label="Déconnexion"
                           color="dark"
-                          variant="transparent"
-                          size="lg"
+                          withArrow
                       >
-                          <IconLogout size={20} />
-                      </ActionIcon>
-                  </Tooltip>
-                </Box>
+                          <ActionIcon 
+                              color="dark" 
+                              variant="transparent" 
+                              size="lg"
+                              onClick={() => logout()}
+                          >
+                              <IconLogout size={20} />
+                          </ActionIcon>
+                      </Tooltip>
+                    </Box>
+                  </MediaQuery>
                 )
                 : (
-                    <Box
-                    sx={(theme) => ({
-                      margin: 0,
-                      padding: 0,
-                      display: 'flex',
-                      justifyContent: 'space-around',
-                      alignItems: 'center',
-                    })}
+                    <MediaQuery 
+                    smallerThan="sm" 
+                    styles={{ 
+                      flexDirection: 'column',
+                      justifyContent: 'flex-start' 
+                      }}
                     >
-                      <NavLink label="Connexion" onClick={() => route('login')} />
-                      <NavLink label="Inscription" onClick={() => route('register')} />
-                    </Box>
+                      <Box
+                      sx={(theme) => ({
+                        margin: 0,
+                        padding: 0,
+                        display: 'flex',
+                        justifyContent: 'space-around',
+                        alignItems: 'center',
+                      })}
+                      >
+                        <NavLink label="Connexion" onClick={() => route('/login')} />
+                        <NavLink label="Inscription" onClick={() => route('/register')} />
+                      </Box>
+                    </MediaQuery>
                   )
               }
               <Booking />

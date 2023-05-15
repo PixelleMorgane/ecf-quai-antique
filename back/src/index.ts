@@ -3,6 +3,7 @@ import express from 'express'
 import { config } from '~/config'
 import { UserController } from '~/resources/pets/user.controller'
 import { DishesController } from '~/resources/pets/dishes.controller'
+import { BookingController } from '~/resources/pets/booking.controller'
 import { ExceptionsHandler } from '~/middlewares/exceptions.handler'
 import { UnknownRoutesHandler } from '~/middlewares/unknownRoutes.handler'
 
@@ -33,6 +34,11 @@ app.use('/users', UserController)
  * Toutes les routes CRUD pour les plats seronts préfixées par `/menus`
  */
 app.use('/menus', DishesController)
+
+/**
+ * Toutes les routes CRUD pour les réservations seronts préfixées par `/menus`
+ */
+app.use('/slots', BookingController)
 
 /**
  * Homepage (uniquement necessaire pour cette demo)

@@ -31,7 +31,6 @@ function Dishes() {
         .catch()
     },[])
     
-    console.log(meals)
 
     return (
         <Page>

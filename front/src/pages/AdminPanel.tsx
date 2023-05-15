@@ -1,4 +1,4 @@
-import { TextInput, Radio, Button, ActionIcon, Image, Text, Tooltip, Badge, Avatar, Title, Navbar, NavLink, Box, useMantineTheme } from '@mantine/core';
+import { TextInput, Radio, Button, ActionIcon, List, Image, Text, Tooltip, Badge, Avatar, Title, Navbar, NavLink, Box, useMantineTheme } from '@mantine/core';
 import { useContext, useState, useEffect } from 'react';
 import logo from '../assets/images/avatar.png';
 import { CurrentUserContext } from '../App';
@@ -10,6 +10,7 @@ import { dishes } from '../utils/api';
 import { addDish } from '../utils/api';
 import { deleteDish } from '../utils/api';
 import { updateDish } from '../utils/api';
+import { fetchBooking } from '../utils/api';
 import Page from '../components/page';
 import plat1 from '../assets/images/plat-1.jpg';
 import plat2 from '../assets/images/plat-2.jpg';
@@ -88,7 +89,6 @@ function Admin(props: Partial<DropzoneProps>) {
         });
     },[meals])
     
-    console.log(meals)
     const navigate = useNavigate();
     const {user, setUser} = useContext(CurrentUserContext);
     const [submittedValues, setSubmittedValues] = useState('');
@@ -125,7 +125,6 @@ function Admin(props: Partial<DropzoneProps>) {
     }
 
     const removeDish = (id: string, index: number) => {
-        console.log(id)
         deleteDish(id)
         .then(() => {
         formUpdateDish.removeListItem('plats', index)
@@ -149,12 +148,38 @@ function Admin(props: Partial<DropzoneProps>) {
         .catch()
     }
 
+    type GetSlot = {
+        id: string;
+        nbPersons: number;
+        date: Date;
+        hours: string;
+        phone: string;
+        firstName: string;
+        lastName: string;
+    }
+
+    const [showBooking, setShowBooking] = useState<GetSlot[]>();
+
+    useEffect(() => {
+        fetchBooking()
+        .then((apiBooking) => {
+            setShowBooking(apiBooking)
+        })
+        .catch()
+    },[])
+
+    console.log(showBooking)
+
     return (
         <Page>
             <Box sx={{ width: "100%", display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
                 <Box>
                     <Title order={2}>Les réservations</Title>
-
+                    <List listStyleType="none" >
+                        {showBooking && showBooking.map((slot) => (
+                            <List.Item key={slot.id}>{slot.firstName} {slot.lastName} pour {slot.nbPersons}</List.Item>  
+                        ))} 
+                    </List>
                 </Box>
                 
                 <Box>

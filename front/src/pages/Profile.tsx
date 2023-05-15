@@ -15,8 +15,6 @@ function Profile() {
     const {user, setUser} = useContext(CurrentUserContext)
 
 
-    console.log(user)
-
     return (
         <Page>
           <Banner />

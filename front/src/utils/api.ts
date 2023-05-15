@@ -135,3 +135,47 @@ console.log(values)
     })
 }
 
+
+
+export async function addBooking (
+    values: {
+        nbPersons: number;
+        date: Date;
+        hours: string;
+        phone: string;
+        firstName: string;
+        lastName: string;
+}) {
+
+
+    return axios.post(`${apiHostName}/slots/booking`, {
+        nbPersons: values.nbPersons,
+        date: `${values.date.getFullYear()}-${values.date.getMonth()+1}-${values.date.getDate()}`,
+        hours: values.hours,
+        phone: values.phone,
+        firstName: values.firstName,
+        lastName: values.lastName,
+    })
+    .then((res) => {
+        // to do treat response
+        const newBooking = res.data;
+        return newBooking
+    })
+    .catch((error) => {
+        // to do treat error
+        console.log(error);
+    })
+}
+
+export async function fetchBooking () {
+
+    return  axios.get(`${apiHostName}/slots/control-pannel`)
+      .then(res => {
+        return res.data
+    })
+    .catch((error) => {
+        // to do treat error
+        console.log(error);
+        return []
+    })
+}
