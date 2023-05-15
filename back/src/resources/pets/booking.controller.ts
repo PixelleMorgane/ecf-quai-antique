@@ -120,10 +120,36 @@ BookingController.post('/booking', async function(req,res) {
     console.log(req.body);
     const { nbPersons, date, hours, phone, firstName, lastName } = req.body;
     const dateInsert = `${date} ${hours}`
+    let dayMoment;
+
+    if(
+        hours === '12:00' || 
+        hours === '12:15' || 
+        hours === '12:30' || 
+        hours === '12:45' || 
+        hours === '13:00' || 
+        hours === '13:15' || 
+        hours === '13:30' || 
+        hours === '13:45' || 
+        hours === '14:00'
+    ) {
+        dayMoment = 'midi';
+    } else {
+        dayMoment = 'soir';
+    }
+
+    const minSlot = `${date} ${dayMoment === 'midi' ? '12:00' : '19:00' }`;
+    const maxSlot = `${date} ${dayMoment === 'midi' ? '14:00' : '22:00' }`;
+    const nbPersonsCount = await db.query('SELECT SUM (nb_persons) from bookings WHERE date >= ? AND date <= ?', [minSlot, maxSlot]);
+    console.log(nbPersonsCount[0]['SUM (nb_persons)'])
+
+    if(parseInt(nbPersonsCount[0]['SUM (nb_persons)'], 10) + nbPersons >= 50) {
+        throw new BadRequestException('la capacité du restaurant est dépassé')
+    }
   
     const resultInsert = await db.query(
-        "INSERT INTO bookings (id, nb_persons, date, phone, first_name, last_name) VALUES (?, ?, ?, ?, ?, ?)", 
-        [ `${uuidv4()}`, nbPersons, `${dateInsert}`, phone, firstName, lastName ]
+        "INSERT INTO bookings (id, nb_persons, date, phone, first_name, last_name, day_moment) VALUES (?, ?, ?, ?, ?, ?, ?)", 
+        [ `${uuidv4()}`, nbPersons, dateInsert, phone, firstName, lastName, dayMoment ]
     )
     return res.status(201).json()
 })

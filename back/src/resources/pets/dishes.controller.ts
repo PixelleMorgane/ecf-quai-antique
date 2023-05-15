@@ -164,7 +164,7 @@ DishesController.post('/control-panel', async function(req,res) {
             catID = '647a6da6-09b4-4182-8206-81232e27fee9'; 
     }
 
-    const dishExist = await db.query('SELECT title from dishes WHERE title = ?', [plateName]) ;
+    const dishExist = await db.query('SELECT title from dishes WHERE title = ?', [plateName]);
    
     if (dishExist.length > 0) {
         throw new BadRequestException('This dish already exist')  

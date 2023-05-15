@@ -71,6 +71,13 @@ function Admin(props: Partial<DropzoneProps>) {
             setMeals(apiMeals)
         })
         .catch()
+
+        fetchBooking()
+        .then((apiBooking) => {
+            setShowBooking(apiBooking)
+            console.log(apiBooking)
+        })
+        .catch()
     },[])
 
     useEffect(() => {
@@ -150,23 +157,17 @@ function Admin(props: Partial<DropzoneProps>) {
 
     type GetSlot = {
         id: string;
-        nbPersons: number;
+        nb_persons: number;
         date: Date;
         hours: string;
         phone: string;
-        firstName: string;
-        lastName: string;
+        first_name: string;
+        last_name: string;
     }
 
     const [showBooking, setShowBooking] = useState<GetSlot[]>();
 
-    useEffect(() => {
-        fetchBooking()
-        .then((apiBooking) => {
-            setShowBooking(apiBooking)
-        })
-        .catch()
-    },[])
+    
 
     console.log(showBooking)
 
@@ -177,7 +178,7 @@ function Admin(props: Partial<DropzoneProps>) {
                     <Title order={2}>Les réservations</Title>
                     <List listStyleType="none" >
                         {showBooking && showBooking.map((slot) => (
-                            <List.Item key={slot.id}>{slot.firstName} {slot.lastName} pour {slot.nbPersons}</List.Item>  
+                            <List.Item key={slot.id}>{`${slot.first_name} ${slot.last_name} pour ${slot.nb_persons} le ${new Date(slot.date).toLocaleString('fr-FR')}`}</List.Item>  
                         ))} 
                     </List>
                 </Box>

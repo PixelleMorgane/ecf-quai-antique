@@ -62,15 +62,14 @@ function Booking() {
             date: new Date(),
             hours: '',
             phone: '',
-            firstName: '',
-            lastName: '',
+            firstName: user && user.firstName ? user.firstName : '',
+            lastName: user && user.lastName ? user.lastName : '',
         },
 
         validate: {
             phone: matches(/^((\+)33|0|0033)[1-9](\d{2}){4}$/, 'Ce n\'est pas un numéro de téléphone valide'),
         },
-      });
-
+    });
 
     return (
         <>
@@ -89,12 +88,12 @@ function Booking() {
                 })}            
             >
                 <TextInput
-                label="First name"
+                label="Prénom"
                 placeholder="First name"
                 {...bookingForm.getInputProps('firstName')}
                 />
                 <TextInput
-                label="Last name"
+                label="Nom"
                 placeholder="Last name"
                 mt="md"
                 {...bookingForm.getInputProps('lastName')}
@@ -111,6 +110,7 @@ function Booking() {
                 // precision={2}
                 min={1}
                 max={15}
+                {...bookingForm.getInputProps('nbPersons')}
                 />
                 <Select
                     required
@@ -119,7 +119,7 @@ function Booking() {
                     data={data}
                     {...bookingForm.getInputProps('hours')}
                 />
-                <Calendar {...bookingForm.getInputProps('date')} color='dark' locale="fr" />
+                <Calendar {...bookingForm.getInputProps('date')} style={{ margin: 'auto' }} color='dark' locale="fr" />
                 
                 <Button mt={15} type="submit" color="dark" size="md" compact>
                 Valider
