@@ -1,16 +1,18 @@
-import { TextInput, Radio, Button, ActionIcon, List, Image, Text, Tooltip, Badge, Avatar, Title, Navbar, NavLink, Box, useMantineTheme } from '@mantine/core';
+import { TextInput, NumberInput, Radio, Button, ActionIcon, List, Image, Text, Tooltip, Badge, Avatar, Title, Navbar, NavLink, Box, useMantineTheme } from '@mantine/core';
 import { useContext, useState, useEffect } from 'react';
 import logo from '../assets/images/avatar.png';
 import { CurrentUserContext } from '../App';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from '@mantine/form';
-import { IconSalad, IconTrash, IconCoinEuro, IconPencil } from '@tabler/icons-react';
+import { IconSalad, IconTrash, IconCoinEuro, IconPencil, IconUsers } from '@tabler/icons-react';
 import { Dropzone, DropzoneProps, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import { dishes } from '../utils/api';
 import { addDish } from '../utils/api';
 import { deleteDish } from '../utils/api';
 import { updateDish } from '../utils/api';
 import { fetchBooking } from '../utils/api';
+import { fetchCapacityRestaurant } from '../utils/api';
+import { updateCapacity } from '../utils/api';
 import Page from '../components/page';
 import plat1 from '../assets/images/plat-1.jpg';
 import plat2 from '../assets/images/plat-2.jpg';
@@ -76,6 +78,13 @@ function Admin(props: Partial<DropzoneProps>) {
         .then((apiBooking) => {
             setShowBooking(apiBooking)
             console.log(apiBooking)
+        })
+        .catch()
+
+        fetchCapacityRestaurant()
+        .then((apiCapacity) => {
+            setShowCapacity(apiCapacity)
+            console.log(apiCapacity)
         })
         .catch()
     },[])
@@ -167,23 +176,54 @@ function Admin(props: Partial<DropzoneProps>) {
 
     const [showBooking, setShowBooking] = useState<GetSlot[]>();
 
+   
+
+    const [showCapacity, setShowCapacity] = useState<number>();
     
 
-    console.log(showBooking)
+    console.log(showCapacity)
+
+    const updateRestaurantCapacity = (nbPersMax: number | undefined) => {
+        if(nbPersMax == undefined){return}
+        updateCapacity(nbPersMax)
+        .then(() => {
+        
+        })
+        .catch()
+    }
 
     return (
         <Page>
             <Box sx={{ width: "100%", display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                
+                <Box>
                 <Box>
                     <Title order={2}>Les réservations</Title>
                     <List listStyleType="none" >
                         {showBooking && showBooking.map((slot) => (
-                            <List.Item key={slot.id}>{`${slot.first_name} ${slot.last_name} pour ${slot.nb_persons} le ${new Date(slot.date).toLocaleString('fr-FR')}`}</List.Item>  
+                            <List.Item key={slot.id} sx={{ marginBottom: 10 }}>
+                                <span style={{ fontWeight: 'bold' }}>{`${slot.first_name} ${slot.last_name}`}</span>
+                                <List withPadding listStyleType="disc">
+                                    <List.Item>{`Téléphone : ${slot.phone}`}</List.Item>
+                                    <List.Item>{`pour ${slot.nb_persons} ${slot.nb_persons === 1 ? 'personne' : 'personnes'}`}</List.Item>
+                                    <List.Item>{`le ${new Date(slot.date).toLocaleString('fr-FR')}`}</List.Item>
+                                </List>
+                            </List.Item>  
                         ))} 
                     </List>
+                    <Title order={3}>Modifier la capacité du restaurant</Title>
+                          
+                            <NumberInput
+                                label="Capacité"
+                                placeholder=""
+                                sx={{ width:'110px' }}
+                                icon={<IconUsers size={20} />}
+                                value={showCapacity}
+                                onChange={(value) => setShowCapacity(value)}
+                            />
+                            <Button type="submit" onClick={() => updateRestaurantCapacity(showCapacity)} className='button' color="dark" size="md" compact style={{ marginTop: 10 }}>Valider</Button> 
+                        
                 </Box>
-                
-                <Box>
                     <Title order={2}>Carte</Title>
                     <Box sx={{ width: "100%" }} mx="auto">
                         <Box>
@@ -294,6 +334,7 @@ function Admin(props: Partial<DropzoneProps>) {
                                                 color="dark" 
                                                 variant="filled" 
                                                 size="lg"
+                                                onClick={() => update(dish)}
                                                 sx={{ marginRight: 10 }}
                                             >
                                                 <IconPencil size={20} />
@@ -358,6 +399,7 @@ function Admin(props: Partial<DropzoneProps>) {
                                                 color="dark" 
                                                 variant="filled" 
                                                 size="lg"
+                                                onClick={() => update(dessert)}
                                                 sx={{ marginRight: 10 }}
                                             >
                                                 <IconPencil size={20} />

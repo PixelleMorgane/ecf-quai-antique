@@ -141,10 +141,11 @@ BookingController.post('/booking', async function(req,res) {
     const minSlot = `${date} ${dayMoment === 'midi' ? '12:00' : '19:00' }`;
     const maxSlot = `${date} ${dayMoment === 'midi' ? '14:00' : '22:00' }`;
     const nbPersonsCount = await db.query('SELECT SUM (nb_persons) from bookings WHERE date >= ? AND date <= ?', [minSlot, maxSlot]);
-    console.log(nbPersonsCount[0]['SUM (nb_persons)'])
+    const restaurantCapacity = await db.query('SELECT * from restaurant');
+    const myBooking = parseInt(nbPersonsCount[0]['SUM (nb_persons)'], 10) + nbPersons;
 
-    if(parseInt(nbPersonsCount[0]['SUM (nb_persons)'], 10) + nbPersons >= 50) {
-        throw new BadRequestException('la capacité du restaurant est dépassé')
+    if( myBooking > restaurantCapacity[0].nb_persons_max) {
+        throw new BadRequestException('La capacité du restaurant est dépassé')
     }
   
     const resultInsert = await db.query(
@@ -163,6 +164,25 @@ BookingController.get('/control-pannel', async function(req,res) {
 
 
     return res.status(200).json(bookingResult);
+})
+
+BookingController.get('/booking', async function(req,res) {
+    
+
+    const restaurantCapacity = await db.query('SELECT * from restaurant');
+
+
+    return res.status(200).json(restaurantCapacity[0].nb_persons_max);
+})
+
+
+BookingController.patch('/control-panel', async function(req,res) {
+    console.log(req.body);
+    const { nbPersonsMax} = req.body;
+   
+    const updateRow = await db.query('UPDATE restaurant SET nb_persons_max = ?', [nbPersonsMax])
+  
+    return res.status(200).json()
 })
 
 

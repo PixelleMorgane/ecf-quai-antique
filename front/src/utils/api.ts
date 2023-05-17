@@ -179,3 +179,33 @@ export async function fetchBooking () {
         return []
     })
 }
+
+export async function fetchCapacityRestaurant () {
+
+    return  axios.get(`${apiHostName}/slots/booking`)
+      .then(res => {
+        return res.data
+    })
+    .catch((error) => {
+        // to do treat error
+        console.log(error);
+        return []
+    })
+}
+
+
+export async function updateCapacity (nbPersonsMax: number) 
+{
+
+    return axios.patch(`${apiHostName}/slots/control-panel`, {
+        nbPersonsMax: nbPersonsMax,
+    })
+    .then((res) => {
+        // to do treat response
+        return res.data
+    })
+    .catch((error) => {
+        // to do treat error
+        console.log(error);
+    })
+}

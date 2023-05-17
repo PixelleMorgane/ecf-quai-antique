@@ -22,9 +22,7 @@ function Banner() {
             alignItems: 'center' 
         }}>
             <Title order={1} 
-            sx={{ 
-                color: 'white', 
-            }}>
+            sx={{ color: 'white' }}>
                 Bonjour {user?.firstName} {user?.lastName} !
             </Title>
         </Box>

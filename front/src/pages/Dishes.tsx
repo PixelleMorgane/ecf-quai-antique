@@ -110,7 +110,7 @@ function Dishes() {
                         <Title order={3}>Entrées</Title> 
                         <List listStyleType="none" >
                                 {meals && meals.entree.map((entree) => (
-                                    <List.Item key={entree.id}>{entree.title} {entree.price}€</List.Item>  
+                                    <List.Item key={entree.id}><span style={{ fontWeight: 500 }}>{entree.title}</span> {entree.price}€</List.Item>  
                                 ))}
                         </List>
                     </Box>
@@ -118,7 +118,7 @@ function Dishes() {
                         <Title order={3}>Plats</Title> 
                         <List listStyleType="none" >
                                 {meals && meals.dish.map((dish) => (
-                                    <List.Item key={dish.id}>{dish.title} {dish.price}€</List.Item>  
+                                    <List.Item key={dish.id}><span style={{ fontWeight: 500 }}>{dish.title}</span> {dish.price}€</List.Item>  
                                 ))} 
                         </List>
                     </Box>
@@ -126,7 +126,7 @@ function Dishes() {
                         <Title order={3}>Desserts</Title> 
                         <List listStyleType="none" >
                                 {meals && meals.dessert.map((dessert) => (
-                                    <List.Item key={dessert.id}>{dessert.title} {dessert.price}€</List.Item>  
+                                    <List.Item key={dessert.id}><span style={{ fontWeight: 500 }}>{dessert.title}</span> {dessert.price}€</List.Item>  
                                 ))}  
                         </List>
                     </Box>

@@ -19,7 +19,7 @@ function Profile() {
         <Page>
           <Banner />
           <Box
-            style={{ padding: 30 }}
+            style={{ padding: 30, minHeight: 500 }}
           >
             <Box>
               <Title order={2}>Mes infos</Title>

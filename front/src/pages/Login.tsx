@@ -53,7 +53,16 @@ function Login() {
       >
           <Title sx={{ color: 'white' }} order={1}>Connectez-vous</Title>
       </Box>
-      <Box maw={400} mx="auto" sx={{ padding: '80px 20px' }}>
+      <Box 
+      maw={400} 
+      mx="auto" 
+      sx={{ 
+        height: 450, 
+        padding: '80px 20px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}>
         <form
           onSubmit={form.onSubmit((values) => {
             login(values)
