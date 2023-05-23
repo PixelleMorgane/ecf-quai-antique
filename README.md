@@ -37,7 +37,7 @@ Ouvrez deux terminaux dans votre éditeur de code
   npm (ou yarn) run start
 
 
-Pour créer un administrateur en local il faut tout d'abbord créer un utilisateur via le formulaire d'inscription.
+Pour créer un administrateur en local il faut tout d'abord créer un utilisateur via le formulaire d'inscription.
 Vérifier que l'utilisateur se trouve en BDD.
 Pour donner le role d'administrateur à votre utilisateur entrer la commande SQL suivante :
 UPDATE users SET is_admin = 1 WHERE id = 'entrez l\'id de votre utilisateur';
