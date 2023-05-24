@@ -11,17 +11,19 @@ Dans votre éditeur de code utiliser une extension qui vous permet d'écrire du 
 Dans le dossier back > src créer un fichier .env.local
 
 Dans ce fichier renseignez les variables d'environnement :
-PORT=5000
-DB_HOST=
-DB_USER=
-DB_PASS=
-DB_NAME=
+PORT=5000\
+DB_HOST=\
+DB_USER=\
+DB_PASS=\
+DB_NAME=\
 
 Ouvrez deux terminaux dans votre éditeur de code
 
  1 pour le front (dans ce terminal tapez les commandes suivantes) :
  
   cd back
+  
+  npm install
 
   set -a
 
@@ -33,6 +35,8 @@ Ouvrez deux terminaux dans votre éditeur de code
 1 pour le front (dans ce terminal tapez les commandes suivantes) :
  
   cd front
+  
+  npm install
 
   npm (ou yarn) run start
 
